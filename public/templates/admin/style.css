@@ -1,0 +1,17 @@
+.alert.alert-danger.error {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.msg {
+    color: red;
+    font-size: 18px;
+}
+
+.title {
+    background: #eee;
+    padding: 5px 15px 10px 14px;
+    display: block;
+    border-radius: 5px;
+    line-height: 1.2;
+}

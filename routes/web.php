@@ -1,0 +1,9 @@
+<?php
+Route::namespace('Admin')->prefix('admin')->group(function(){
+    Route::prefix('home')->group(function(){
+        Route::get('index',[
+            'uses'=>'HomeController@index',
+            'as'=>'admin.home.index'
+        ]);
+    });
+});
