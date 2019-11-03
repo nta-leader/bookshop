@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="{{ Request::is('admin/category*') ? 'active' : ''}}">
-          <a href="">
+          <a href="{{ route('admin.category.index') }}">
             <i class="fa fa-files-o"></i>
             <span>Quản lý danh mục</span>
           </a>

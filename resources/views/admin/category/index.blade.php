@@ -35,19 +35,19 @@
                                 <th>Số lượng sản phẩm</th>
                                 <th>Chức năng</th>
                             </tr>
-                            @foreach($objItems as $stt => $objItem)
+                            
                             @php
-                                $id = $objItem->id;
-                                $name = $objItem->name;
-                                $picture = $objItem->picture;
-                                $count_product = $objItem->count_product;
-                                $urlProduct = route('admin.product.index',['id_category'=>$id]);
-                                $urlSize = route('admin.category.size.index',['id_category'=>$id]);
+                                $id = 1;
+                                $name = 1;
+                                $picture = 1;
+                                $count_product = 1;
+                                $urlProduct = 1;
+                                $urlSize = 1;
                                 $urlEdit = route('admin.category.edit',['id'=>$id]);
                                 $urlDel = route('admin.category.del',['id'=>$id]);
                             @endphp
                             <tr>
-                                <td>{{ $stt + 1 }}</td>
+                                <td>1</td>
                                 <td>{{ $name }}</td>
                                 <td><img src="/storage/app/files/category/{{ $picture }}" width="50px"></td>
                                 <td>{{ $count_product }}</td>
@@ -58,7 +58,7 @@
                                     <a data-urldel="{{ $urlDel }}" data-countProduct="{{ $count_product }}" class="del btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>

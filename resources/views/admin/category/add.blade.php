@@ -1,4 +1,7 @@
 @extends('templates.admin.master')
+@section('css')
+<link rel="stylesheet" href="{{ $urlTemplateAdmin }}/bower_components/select2/dist/css/select2.min.css">
+@endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -36,6 +39,13 @@
                 <form role="form" method="POST" action="{{ route('admin.category.add') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
+                        <div class="form-group">
+                            <label>Danh mục cha</label>
+                            <select class="form-control" style="width: 100%;">
+                                <option value="0" selected="selected">ROOT</option>
+                                @php indanhmuc($data); @endphp
+                            </select>
+                        </div>
                         @if ($errors->has('name'))
                             <div class="alert alert-danger error">
                                 <ul>
@@ -48,19 +58,6 @@
                         <div class="form-group">
                             <label>Tên danh mục</label>
                             <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nhập tên danh mục">
-                        </div>
-                        @if ($errors->has('picture'))
-                            <div class="alert alert-danger error">
-                                <ul>
-                                    @foreach ($errors->get('picture') as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="form-group">
-                            <label>Hình ảnh</label><br>
-                            <input type="file" name="picture" >
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -78,4 +75,13 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+@endsection
+@section('js')
+<script src="{{ $urlTemplateAdmin }}/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  })
+</script>
 @endsection
