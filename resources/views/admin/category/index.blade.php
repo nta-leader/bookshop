@@ -26,41 +26,7 @@
                     @if(Session::has('msg'))
                         <p class="msg">{{ Session::get('msg') }}</p>
                     @endif
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th style="width: 10px;">#</th>
-                                <th>Tên danh mục</th>
-                                <th>Icon</th>
-                                <th>Số lượng sản phẩm</th>
-                                <th>Chức năng</th>
-                            </tr>
-                            
-                            @php
-                                $id = 1;
-                                $name = 1;
-                                $picture = 1;
-                                $count_product = 1;
-                                $urlProduct = 1;
-                                $urlSize = 1;
-                                $urlEdit = route('admin.category.edit',['id'=>$id]);
-                                $urlDel = route('admin.category.del',['id'=>$id]);
-                            @endphp
-                            <tr>
-                                <td>1</td>
-                                <td>{{ $name }}</td>
-                                <td><img src="/storage/app/files/category/{{ $picture }}" width="50px"></td>
-                                <td>{{ $count_product }}</td>
-                                <td>
-                                    <a href="{{ $urlProduct }}" class="btn btn-info">Xem sản phẩm</a> |
-                                    <a href="{{ $urlSize }}" class="btn btn-warning">Quản lý size</a> |
-                                    <a href="{{ $urlEdit }}" class="btn btn-success">Sửa</a> |
-                                    <a data-urldel="{{ $urlDel }}" data-countProduct="{{ $count_product }}" class="del btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+                    @php indanhmuc_category_admin_index($objItems) @endphp
                 </div>
                 <!-- /.box-body -->
             </div>

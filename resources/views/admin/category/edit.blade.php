@@ -36,6 +36,22 @@
                 <form role="form" method="POST" action="{{ route('admin.category.edit',['id'=>$objItem->id]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
+                        @if($errors->has('parent_id'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('parent_id') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>Danh mục cha</label>
+                            <select name="parent_id" class="form-control" style="width: 100%;">
+                                <option value="0" selected="selected">ROOT</option>
+                                @php indanhmuc($data, 0, $objItem->parent_id); @endphp
+                            </select>
+                        </div>
                         @if ($errors->has('name'))
                             <div class="alert alert-danger error">
                                 <ul>
@@ -49,21 +65,6 @@
                             <label>Tên danh mục</label>
                             <input type="text" name="name" value="{{ $objItem->name }}" class="form-control" placeholder="Nhập tên danh mục">
                         </div>
-                    </div>
-                    @if ($errors->has('picture_new'))
-                        <div class="alert alert-danger error">
-                            <ul>
-                                @foreach ($errors->get('picture_new') as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <div class="form-group">
-                        <label>Hình ảnh</label><br>
-                        <img src="/storage/app/files/category/{{ $objItem->picture }}" width="25%">
-                        <input type="text" name="picture" value="{{ $objItem->picture }}" style="display:none;">
-                        <input type="file" name="picture_new">
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

@@ -33,3 +33,13 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
         ]);
     });
 });
+Route::namespace('Book')->group(function(){
+    Route::get('/',[
+        'uses'=>'HomeController@index',
+        'as'=>'book.home.index'
+    ]);
+    Route::get('/{url}-{id}',[
+        'uses'=>'CategoryController@index',
+        'as'=>'book.category.index'
+    ]);
+});

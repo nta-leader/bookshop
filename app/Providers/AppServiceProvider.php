@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use View;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view::share('urlTemplateAdmin',getenv('TEMPLATE_ADMIN'));
+        view::share('urlTemplateBook',getenv('TEMPLATE_BOOK'));
+
+        $category = DB::table('category')->get();
+        view::share('category',$category);
+        
     }
 }

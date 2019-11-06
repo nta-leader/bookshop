@@ -39,9 +39,18 @@
                 <form role="form" method="POST" action="{{ route('admin.category.add') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
+                        @if($errors->has('parent_id'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('parent_id') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label>Danh mục cha</label>
-                            <select class="form-control" style="width: 100%;">
+                            <select name="parent_id" class="form-control" style="width: 100%;">
                                 <option value="0" selected="selected">ROOT</option>
                                 @php indanhmuc($data); @endphp
                             </select>
