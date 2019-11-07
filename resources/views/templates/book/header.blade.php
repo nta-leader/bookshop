@@ -34,14 +34,14 @@
 							<ul class="tg-addnav">
 								<li>
 									<a href="javascript:void(0);">
-										<i class="icon-envelope"></i>
-										<em>Contact</em>
+										<i class="fa fa-phone" aria-hidden="true"></i>
+										<em>09.194.194.96</em>
 									</a>
 								</li>
 								<li>
 									<a href="javascript:void(0);">
-										<i class="icon-question-circle"></i>
-										<em>Help</em>
+										<i class="fa fa-envelope" aria-hidden="true"></i>
+										<em>Theanhit.com@gmail.com</em>
 									</a>
 								</li>
 							</ul>
@@ -91,45 +91,28 @@
 												<a href="javascript:void(0);">DANH MỤC SÁCH</i></a>
 												@php indanhmuc_menu_public($category); @endphp
 											</li>
-											<li class="menu-item-has-children current-menu-item">
-												<a href="javascript:void(0);">Home</a>
-												<ul class="sub-menu">
-													<li><a href="index.html">Home V one</a></li>
-													<li><a href="indexv2.html">Home V two</a></li>
-													<li><a href="indexv3.html">Home V three</a></li>
-												</ul>
+											<li class="{{ Request::is('/') ? 'current-menu-item':''}}">
+												<a href="javascript:void(0);">Trang chủ</a>
 											</li>
+											<li><a href="products.html">Sự kiện Sale</a></li>
 											<li class="menu-item-has-children">
-												<a href="javascript:void(0);">Authors</a>
-												<ul class="sub-menu">
-													<li><a href="authors.html">Authors</a></li>
-													<li><a href="authordetail.html">Author Detail</a></li>
-												</ul>
+												<a href="javascript:void(0);">Giới thiệu</a>
 											</li>
-											<li><a href="products.html">Best Selling</a></li>
-											<li><a href="products.html">Weekly Sale</a></li>
+											<li><a href="products.html">Hướng dẫn</a></li>
+											<li><a href="products.html">Chính sách</a></li>
 											<li class="menu-item-has-children">
-												<a href="javascript:void(0);">Latest News</a>
+												<a href="javascript:void(0);">Tin tức</a>
 												<ul class="sub-menu">
 													<li><a href="newslist.html">News List</a></li>
 													<li><a href="newsgrid.html">News Grid</a></li>
 													<li><a href="newsdetail.html">News Detail</a></li>
 												</ul>
 											</li>
-											<li><a href="contactus.html">Contact</a></li>
+											<li><a href="contactus.html">Liên hệ</a></li>
 										</ul>
 									</div>
 								</nav>
 								<div class="tg-wishlistandcart">
-									<div class="dropdown tg-themedropdown tg-wishlistdropdown">
-										<a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="tg-themebadge">3</span>
-											<i class="icon-heart"></i>
-										</a>
-										<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-											<div class="tg-description"><p>No products were added to the wishlist!</p></div>
-										</div>
-									</div>
 									<div class="dropdown tg-themedropdown tg-minicartdropdown">
 										<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span class="tg-themebadge">3</span>
@@ -181,31 +164,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="dropdown tg-themedropdown tg-currencydropdown">
-									<a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span>USD</span>
-									</a>
-									<ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
-										<li>
-											<a href="javascript:void(0);">
-												<i>£</i>
-												<span>British Pound</span>
-											</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">
-												<i>$</i>
-												<span>Us Dollar</span>
-											</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);">
-												<i>€</i>
-												<span>Euro</span>
-											</a>
-										</li>
-									</ul>
-								</div>
 								</div>
 							</div>
 						</div>

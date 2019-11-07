@@ -64,38 +64,33 @@
                             <input type="text" name="product_code" value="{{ old('product_code') }}" class="form-control" placeholder="Nhập mã sản phẩm">
                         </div>
 
-                        @if ($errors->has('id_category'))
+                        @if ($errors->has('basis_price'))
                             <div class="alert alert-danger error">
                                 <ul>
-                                    @foreach ($errors->get('id_category') as $error)
+                                    @foreach ($errors->get('basis_price') as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                         @endif
                         <div class="form-group">
-                            <label>Danh mục</label>
-                            <select name="id_category" class="form-control">
-                                <option value="">Chọn danh mục</option>
-                                @foreach($objItemsCategory as $objItem)
-                                <option @if(old('id_category')==$objItem->id) selected @endif value="{{ $objItem->id }}">{{ $objItem->name }}</option>
-                                @endforeach
-                            </select>
+                            <label>Giá</label>
+                            <input id="gia_color" type="number" name="basis_price" value="{{ old('basis_price') }}" class="form-control" placeholder="Nhập giá sản phẩm">
+                            <p id="view_gia_color" style="padding: 1px 12px;color:red;"></p>
                         </div>
 
-                        @if ($errors->has('id_category'))
+                        @if ($errors->has('evaluate'))
                             <div class="alert alert-danger error">
                                 <ul>
-                                    @foreach ($errors->get('id_category') as $error)
+                                    @foreach ($errors->get('evaluate') as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                         @endif
                         <div class="form-group">
-                            <label>Danh mục</label>
+                            <label>Dánh giá</label>
                             <select name="evaluate" class="form-control">
-                                <option value="">Chọn sao</option>
                                 @for($i=0;$i<=5;$i++)
                                 <option @if(old('evaluate')==$i) selected @endif value="{{ $i }}">{{ $i }} sao</option>
                                 @endfor
@@ -116,6 +111,19 @@
                             <input type="file" name="picture" >
                         </div>
 
+                        @if ($errors->has('link_document'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('link_document') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>link document</label>
+                            <input type="text" name="link_document" value="{{ old('link_document') }}" class="form-control" placeholder="link đọc thử ">
+                        </div>
                         @if ($errors->has('content'))
                             <div class="alert alert-danger error">
                                 <ul>
@@ -168,8 +176,21 @@
 @section('js')
 <script src="{{ $urlTemplateAdmin }}/ckeditor/ckeditor.js"></script>
 <script>
+function number_format( number, decimals, dec_point, thousands_sep ) {
+    var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
+    var d = dec_point == undefined ? "," : dec_point;
+    var t = thousands_sep == undefined ? "." : thousands_sep, s = n < 0 ? "-" : "";
+    var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+                              
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}
 $(document).ready(function () {
     CKEDITOR.replace( 'ckeditor1' );
 })
+$("#gia_color").keyup(function () {
+    var gia =$(this).val();
+    var value='Giá : '+number_format(gia,0,'.',',')+' đ';
+    $("#view_gia_color").text(value);
+}).keyup();
 </script>
 @endsection

@@ -33,27 +33,24 @@
                     @if(Session::has('msg'))
                         <p class="msg">{{ Session::get('msg') }}</p>
                     @endif
+                    <form id="form" role="form" method="get" action="{{ route('admin.product.del') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <table id="dataTables-example" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Mã sản phẩm</th>
-                                <th>
-                                    <select id="danhmuc" class="form-control">
-                                        <option value="{{ route('admin.product.index',['id_category'=>0]) }}">Tất cả danh mục</option>
-                                        @foreach($objItemsCategory as $objItem)
-                                        <option @if($objItem->id==$id_category) selected @endif value="{{ route('admin.product.index',['id_category'=>$objItem->id]) }}">{{ $objItem->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
                                 <th>Giá</th>
+                                <th>link document</th>
                                 <th>Hình ảnh</th>
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
                     </table>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -66,8 +63,8 @@
 </div>
 <!-- /.content-wrapper -->
 <script>
-function del(id,id_category=0){
-    var urlDel = "{{ route('admin.product.del') }}?id=";
+function del(id){
+    var urlDel = "{{ route('admin.product.del') }}?id[]=";
     urlDel +=id;
     swal({   
         title: "Xóa sản phẩm này",
@@ -117,12 +114,13 @@ setTimeout(function(){
 <!-- DataTables -->
 <script src="{{ $urlTemplateAdmin }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ $urlTemplateAdmin }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="{{ $urlTemplateAdmin }}/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $('#dataTables-example').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url":"{{ route('admin.product.view',['id_category'=>$id_category]) }}",
+            "url":"{{ route('admin.product.view') }}",
             "dataType":"json",
             "type":"POST",
             "data":{"_token":"{{ csrf_token() }}"}
@@ -146,19 +144,56 @@ setTimeout(function(){
             {"data":"id"},
             {"data":"name"},
             {"data":"product_code"},
-            {"data":"category_name"},
-            {"data":"default_price"},
+            {"data":"price"},
+            {"data":"link_document"},
             {"data":"picture"},
             {"data":"active"},
             {"data":"action"}
         ]
     });
 
-    $(document).ready(function(){
-        $("#danhmuc").change(function(){
-            var url = $("#danhmuc").val();
-            window.location.href=url;   
-        })
-    })
+    $(document).ready(function() {
+    //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+        $("#form").validate({
+            submitHandler: function (form) {
+                var id=[];
+                var arrId = document.querySelectorAll('.id:checked');
+                for(var i=0;i<arrId.length;i++){
+                    id[i]=arrId[i].value;
+                }
+                if(id.length == 0){
+                    swal("Vui lòng chon sản phẩm cần xóa !","","error");
+                }else{
+                    swal({   
+                        title: "Xóa những sản phẩm này",
+                        text: "",         
+                        type: "warning",   
+                        showCancelButton: true,   
+                        confirmButtonColor: "#DD6B55",   
+                        confirmButtonText: "OK",   
+                        cancelButtonText: "Hủy",   
+                        closeOnConfirm: false,   
+                        }, 
+                        function(isConfirm){   
+                            $.ajax({
+                                url: '{{route('admin.product.del')}}',
+                                type: 'get',
+                                cache: false,
+                                data: {
+                                    id:id,
+                                },
+                                success: function(data){
+                                    window.location.href="{{ route('admin.product.index') }}";   
+                                },
+                                error: function (){
+                                    alert('Có lỗi xảy ra');
+                                }
+                            });
+                        }
+                    );
+                }
+            }
+        });
+    });
 </script>
 @endsection

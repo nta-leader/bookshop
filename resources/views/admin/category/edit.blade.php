@@ -35,6 +35,7 @@
             <div class="box-body">
                 <form role="form" method="POST" action="{{ route('admin.category.edit',['id'=>$objItem->id]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <input type="text" name="id" value="{{ $objItem->id }}" style="display:none;>
                     <div class="box-body">
                         @if($errors->has('parent_id'))
                             <div class="alert alert-danger error">
@@ -64,6 +65,19 @@
                         <div class="form-group">
                             <label>Tên danh mục</label>
                             <input type="text" name="name" value="{{ $objItem->name }}" class="form-control" placeholder="Nhập tên danh mục">
+                        </div>
+                        @if ($errors->has('url'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('url') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>Url</label>
+                            <input type="text" name="url"" value="{{ $objItem->url }}" class="form-control" placeholder="VD: sach-on-thi">
                         </div>
                     </div>
                     <!-- /.box-body -->

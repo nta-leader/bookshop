@@ -52,7 +52,7 @@
                             <label>Danh mục cha</label>
                             <select name="parent_id" class="form-control" style="width: 100%;">
                                 <option value="0" selected="selected">ROOT</option>
-                                @php indanhmuc($data); @endphp
+                                @php indanhmuc($data, 0, old('parent_id')); @endphp
                             </select>
                         </div>
                         @if ($errors->has('name'))
@@ -67,6 +67,19 @@
                         <div class="form-group">
                             <label>Tên danh mục</label>
                             <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nhập tên danh mục">
+                        </div>
+                        @if ($errors->has('url'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('url') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>Url</label>
+                            <input type="text" name="url"" value="{{ old('url') }}" class="form-control" placeholder="VD: sach-on-thi">
                         </div>
                     </div>
                     <!-- /.box-body -->

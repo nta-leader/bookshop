@@ -44,10 +44,9 @@ document.addEventListener("DOMContentLoaded",function(){
     for(var i=0;i<del.length;i++){
         del[i].onclick = function(){
             var urlDel = this.getAttribute('data-urlDel');
-            var countProduct = this.getAttribute('data-countProduct');
             swal({   
                 title: "Xóa danh mục này",
-                text: "và "+countProduct+" sản phẩm",         
+                text: "",         
                 type: "warning",   
                 showCancelButton: true,   
                 confirmButtonColor: "#DD6B55",   

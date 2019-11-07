@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function postAdd(CategoryModel $category, AddRequest $request){
         $arrItem = [
             'name'      => $request->name,
-            'url'       => str_slug($request->name),
+            'url'       => str_slug($request->url),
             'parent_id' => $request->parent_id
         ];
         if($category->add($arrItem)){
@@ -38,13 +38,13 @@ class CategoryController extends Controller
     public function postEdit($id, CategoryModel $category, EditRequest $request){
         $arrItem = [
             'name'      => $request->name,
-            'url'       => str_slug($request->name),
+            'url'       => str_slug($request->url),
             'parent_id' => $request->parent_id
         ];
         if($category->edit($id, $arrItem)){
             return redirect()->route('admin.category.index')->with(['msg'=>'Sửa thành công !']);
         }else{
-            return redirect()->back()->with(['msg'=>'Có lỗi xảy ra !']);
+            return redirect()->route('admin.category.index');
         }
     }
     public function del($id, CategoryModel $category){

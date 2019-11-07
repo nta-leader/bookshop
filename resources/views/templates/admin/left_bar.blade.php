@@ -27,7 +27,7 @@
           </a>
         </li>
         <li class="{{ Request::is('admin/product*') ? 'active' : ''}}">
-          <a href="">
+          <a href="{{ route('admin.product.index') }}"">
             <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
           </a>
         </li>

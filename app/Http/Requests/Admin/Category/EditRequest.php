@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class EditRequest extends FormRequest
 {
@@ -21,11 +22,12 @@ class EditRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
             'parent_id'=>'required',
-            'name'     =>'required|max:255'
+            'name'     =>'required|max:255',
+            'url'      =>'required|max:255|unique:category,url,'.$request->id.',id'
         ];
     }
     public function messages(){

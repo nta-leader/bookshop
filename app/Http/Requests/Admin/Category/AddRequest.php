@@ -25,14 +25,18 @@ class AddRequest extends FormRequest
     {
         return [
             'parent_id'=>'required',
-            'name'     =>'required|max:255'
+            'name'     =>'required|max:255',
+            'url'      =>'required|max:255|unique:category,url'
         ];
     }
     public function messages(){
         return [
             'parent_id.required'=>'Vui lòng chọn danh mục cha !',
             'name.required'     =>'Vui lòng nhập tên danh mục !',
-            'name.max'          =>'Tên danh mục tối đa 255 ký tự !'
+            'name.max'          =>'Tên danh mục tối đa 255 ký tự !',
+            'url.required'     =>'Vui lòng nhập url !',
+            'url.max'          =>'Tên url tối đa 255 ký tự !',
+            'url.unique'          =>'Tên url đã được sử dụng !',
         ];
     }
 }

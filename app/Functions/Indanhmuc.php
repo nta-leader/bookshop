@@ -21,7 +21,7 @@ function indanhmuc_category_admin_index($data, $parent_id = 0){
         if($item->parent_id == $parent_id){
             $urlEdit = route('admin.category.edit',['id'=>$item->id]);
             $urlDel = route('admin.category.del',['id'=>$item->id]);
-            echo '<li class="li-cat">'.$item->name.' <a href="'.$urlEdit.'" class="btna btn-success">Sửa</a> | <a href="'.$urlDel.'" class="btna btn-danger">Xóa</a></li>';
+            echo '<li class="li-cat">'.$item->name.' <a class="btna btn-warning">QL sản phẩm</a> | <a href="'.$urlEdit.'" class="btna btn-success">Sửa</a> | <a data-urlDel="'.$urlDel.'" class="del btna btn-danger">Xóa</a></li>';
             unset($data[$key]);
             indanhmuc_category_admin_index($data, $item->id);
         }
@@ -32,7 +32,7 @@ function indanhmuc_menu_public($data, $parent_id = 0){
     echo '<ul class="sub-menu">';
     foreach ($data as $key => $item) {
         if($item->parent_id == $parent_id){
-            $url = route('book.category.index',['url'=>$item->url,'id'=>$item->id]);
+            $url = route('book.category.index',['url'=>$item->url]);
             $check = DB::table('category')->where('parent_id', $item->id)->count();
             if($check==0){
                 $str = "";
