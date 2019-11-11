@@ -70,59 +70,6 @@
                             <input type="text" name="name" value="{{ $name }}" class="form-control" placeholder="Nhập tên sự kiện sale - slide">
                         </div>
 
-                        @if ($errors->has('start_date'))
-                            <div class="alert alert-danger error">
-                                <ul>
-                                    @foreach ($errors->get('start_date') as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Thời gian bắt đầu</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input name="start_date" value="{{ $start_date }}" type="text" class="form-control datemask" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="dd/mm/yyyy">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                        <input type="text" name="start_time" value="{{ $start_time }}" class="form-control timepicker">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @if ($errors->has('finish_date'))
-                            <div class="alert alert-danger error">
-                                <ul>
-                                    @foreach ($errors->get('finish_date') as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Thời gian kết thúc</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input name="finish_date" value="{{ $finish_date }}" type="text" class="form-control datemask" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="dd/mm/yyyy">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                        <input type="text" name="finish_time" value="{{ $finish_date }}" class="form-control timepicker">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         @if ($errors->has('percent'))
                             <div class="alert alert-danger error">
                                 <ul>

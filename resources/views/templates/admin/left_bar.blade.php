@@ -32,7 +32,7 @@
           </a>
         </li>
         <li class="{{ Request::is('admin/sale*') ? 'active' : '' }}">
-          <a href="">
+          <a href="{{ route('admin.sale.index') }}">
             <i class="fa fa-newspaper-o"></i>
             <span>Quản lý sale - slide</span>
           </a>

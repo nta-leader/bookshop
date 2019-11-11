@@ -21,7 +21,8 @@ function indanhmuc_category_admin_index($data, $parent_id = 0){
         if($item->parent_id == $parent_id){
             $urlEdit = route('admin.category.edit',['id'=>$item->id]);
             $urlDel = route('admin.category.del',['id'=>$item->id]);
-            echo '<li class="li-cat">'.$item->name.' <a class="btna btn-warning">QL sản phẩm</a> | <a href="'.$urlEdit.'" class="btna btn-success">Sửa</a> | <a data-urlDel="'.$urlDel.'" class="del btna btn-danger">Xóa</a></li>';
+            $urlProduct = route('admin.category.product.index',['id_category'=>$item->id]);
+            echo '<li class="li-cat">'.$item->name.' <a href="'.$urlProduct.'" class="btna btn-warning">QL sản phẩm</a> | <a href="'.$urlEdit.'" class="btna btn-success">Sửa</a> | <a data-urlDel="'.$urlDel.'" class="del btna btn-danger">Xóa</a></li>';
             unset($data[$key]);
             indanhmuc_category_admin_index($data, $item->id);
         }

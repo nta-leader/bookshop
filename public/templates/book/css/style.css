@@ -56,6 +56,12 @@ div#tg-homeslider {
 .tg-navigation > ul > li:last-child .sub-menu .sub-menu{
     left: 100% !important;
 }
+.tg-booktitle {
+    padding-bottom: 5px;
+}
+span.fa.fa-star {
+    color: #fcd01f;
+}
 @media(max-width:991px){
     .tg-homeslider .item{
         height: 508px;

@@ -5,7 +5,6 @@
             <th style="width: 10px">#</th>
             <th>Tên sản phẩm</th>
             <th>Mã sản phẩm</th>
-            <th>Danh mục</th>
             <th>Giá</th>
             <th>Sale(%)</th>
             <th>Giá sale</th>
@@ -13,12 +12,12 @@
         </tr>
     </thead>
     <tbody>
+    @php $percent=$objItem->percent @endphp
     @foreach($objItems as $objItem)
     @php
         $id=$objItem->id;
         $name=$objItem->name;
         $product_code=$objItem->product_code;
-        $category_name=$objItem->category_name;
         $basis_price=$objItem->basis_price;
         $price=$objItem->price;
         $picture=$objItem->picture;
@@ -27,7 +26,6 @@
             <td><input class="checkbox1 flat-red" type="checkbox" name="choose[]" value="{{ $id }}"></td>
             <td>{{ $name }}</td>
             <td>{{ $product_code }}</td>
-            <td>{{ $category_name }}</td>
             <td>{{ number_format($basis_price,0) }}đ</td>
             <td>{{ $percent }}%</td>
             <td><span style="color:red;">{{ number_format($price,0) }}đ</span></td>

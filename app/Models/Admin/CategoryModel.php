@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class CategoryModel extends Model
 {
@@ -39,5 +40,33 @@ class CategoryModel extends Model
         foreach ($arrItems as $key => $item) {
             $this->findParent($item->id,$data);
         }
+    }
+    public function delProduct($arrId){
+        return DB::table('category_product')->whereIn('id', $arrId)->delete();
+    }
+    public function getItemsProduct(){
+        return DB::table("product")
+        ->leftjoin('sale','product.id_sale','=','sale.id')
+        ->select(
+            'product.id', 
+            'product.name', 
+            'product.product_code', 
+            'product.basis_price', 
+            'product.picture',
+            DB::raw(
+                'product.basis_price*(100-sale.percent)/100 as price'
+            ),
+        )
+        ->where('product.active',1)
+        ->get();
+    }
+    public function add_product_category($id_category, $id_product){
+        foreach ($id_product as $key => $id) {
+            $check = DB::table('category_product')->where('id_category', $id_category)->where('id_product', $id)->count();
+            if($check == 0){
+               DB::table('category_product')->insert(['id_category'=>$id_category,'id_product'=>$id]); 
+            }
+        }
+        return true;
     }
 }

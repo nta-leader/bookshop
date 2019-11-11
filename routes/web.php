@@ -31,6 +31,28 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
             'uses'=>'CategoryController@del',
             'as'=>'admin.category.del'
         ]);
+        Route::prefix('product')->group(function(){
+            Route::get('index/{id_category}',[
+                'uses'=>'CategoryController@indexProduct',
+                'as'=>'admin.category.product.index'
+            ]);
+            Route::post('view/{id_category}',[
+                'uses'=>'CategoryController@viewProduct',
+                'as'=>'admin.category.product.view'
+            ]);
+            Route::get('add/{id_category}',[
+                'uses'=>'CategoryController@addProduct',
+                'as'=>'admin.category.product.add'
+            ]);
+            Route::post('add/{id_category}',[
+                'uses'=>'CategoryController@postAddProduct',
+                'as'=>'admin.category.product.add'
+            ]);
+            Route::get('del',[
+                'uses'=>'CategoryController@delProduct',
+                'as'=>'admin.category.product.del'
+            ]);
+        });
     });
     Route::prefix('product')->group(function(){
         Route::get('index',[
@@ -66,6 +88,66 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
             'as'=>'admin.product.del'
         ]);
     });
+    Route::prefix('sale')->group(function(){
+        Route::get('index',[
+            'uses'=>'SaleController@index',
+            'as'=>'admin.sale.index'
+        ]);
+        Route::post('view',[
+            'uses'=>'SaleController@view',
+            'as'=>'admin.sale.view'
+        ]);
+        Route::get('add',[
+            'uses'=>'SaleController@add',
+            'as'=>'admin.sale.add'
+        ]);
+        Route::post('add',[
+            'uses'=>'SaleController@postAdd',
+            'as'=>'admin.sale.add'
+        ]);
+        Route::get('edit/{id}',[
+            'uses'=>'SaleController@edit',
+            'as'=>'admin.sale.edit'
+        ]);
+        Route::post('edit/{id}',[
+            'uses'=>'SaleController@postEdit',
+            'as'=>'admin.sale.edit'
+        ]);
+        Route::get('active',[
+            'uses'=>'SaleController@active',
+            'as'=>'admin.sale.active'
+        ]);
+        Route::get('del/{id}',[
+            'uses'=>'SaleController@del',
+            'as'=>'admin.sale.del'
+        ]);
+        Route::prefix('product')->group(function(){
+            Route::get('index/{id_sale}',[
+                'uses'=>'SaleController@indexProduct',
+                'as'=>'admin.sale.product.index'
+            ]);
+            Route::post('view/{id_sale}',[
+                'uses'=>'SaleController@viewProduct',
+                'as'=>'admin.sale.product.view'
+            ]);
+            Route::get('add/{id_sale}',[
+                'uses'=>'SaleController@addSaleProduct',
+                'as'=>'admin.sale.product.add'
+            ]);
+            Route::get('list',[
+                'uses'=>'SaleController@list',
+                'as'=>'admin.sale.product.list'
+            ]);
+            Route::post('add/{id_sale}',[
+                'uses'=>'SaleController@addPostSaleProduct',
+                'as'=>'admin.sale.product.add'
+            ]);
+            Route::get('del',[
+                'uses'=>'SaleController@delSaleProduct',
+                'as'=>'admin.sale.product.del'
+            ]);
+        });
+    });
 });
 Route::namespace('Book')->group(function(){
     Route::get('/',[
@@ -75,5 +157,9 @@ Route::namespace('Book')->group(function(){
     Route::get('/{url}.html',[
         'uses'=>'CategoryController@index',
         'as'=>'book.category.index'
+    ]);
+    Route::get('/sach/{url}.html',[
+        'uses'=>'ProductController@index',
+        'as'=>'book.product.index'
     ]);
 });

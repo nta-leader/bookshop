@@ -52,17 +52,9 @@
                         <div class="form-group">
                             <label>Loại sản phẩm</label>
                             <select id="type_product" class="form-control">
+                                <option value="">--Chọn loại sản phẩm--</option>
                                 <option value="0">Sản phẩm chưa được sale</option>
                                 <option value="1">Tất cả(ghi đè nếu sản phẩm đã ở sale khác)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Danh mục</label>
-                            <select id="category" class="form-control">
-                                <option value="">Chọn danh mục</option>
-                                @foreach($objItemsCategory as $objItem)
-                                <option value="{{ $objItem->id }}">{{ $objItem->name }}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -91,22 +83,19 @@
 <script src="{{ $urlTemplateAdmin }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
-    $("#category").change(function(){
-        var id_sale={{$id_sale}};
-        var id_category=$("#category").val();
+    $("#type_product").change(function(){
         var type=$("#type_product").val();
-        if(id_category==""){
+        if(type==""){
             $('#view').html("");
-            return swal("Vui lòng chọn danh mục !","","error");
+            return swal("Vui lòng chọn loại sản phẩm !","","error");
         }
         $.ajax({
             url:'{{route('admin.sale.product.list')}}',
             type:'get',
             cache: false,
             data:{
-                id_sale:id_sale,
                 type:type,
-                id_category:id_category
+                id_sale:{{ $id_sale }}
             },
             success:function(data){
                 $('#view').html(data);

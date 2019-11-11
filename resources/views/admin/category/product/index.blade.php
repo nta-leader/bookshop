@@ -10,11 +10,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Quản lý sản phẩm
+            Quản lý sản phẩm  : "{{$objItem->name}}"
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin.home.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><i class="fa fa-th"></i> Quản lý sản phẩm</li>
+            <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-files-o"></i> Quản lý danh mục</a></li>
+            <li><a href="{{ route('admin.category.product.index',['id_category'=>$objItem->id]) }}">Quản lý sản phẩm</a></li>
         </ol>
     </section>
 
@@ -25,7 +26,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <a href="{{ route('admin.product.add') }}" class="btn btn-success">Thêm sản phẩm</a>
+                    <a href="{{ route('admin.category.product.add',['id_category'=>$objItem->id]) }}" class="btn btn-success">Thêm sản phẩm</a>
                 </h3>
             </div>
             <div class="box-body">
@@ -33,7 +34,7 @@
                     @if(Session::has('msg'))
                         <p class="msg">{{ Session::get('msg') }}</p>
                     @endif
-                    <form id="form" role="form" method="get" action="{{ route('admin.product.del') }}" enctype="multipart/form-data">
+                    <form id="form" role="form" method="get" action="{{ route('admin.sale.product.del') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <table id="dataTables-example" class="table table-bordered">
                         <thead>
@@ -42,9 +43,7 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Mã sản phẩm</th>
                                 <th>Giá</th>
-                                <th>link document</th>
                                 <th>Hình ảnh</th>
-                                <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -64,10 +63,10 @@
 <!-- /.content-wrapper -->
 <script>
 function del(id){
-    var urlDel = "{{ route('admin.product.del') }}?id[]=";
-    urlDel +=id;
+    var urlDel = "{{ route('admin.category.product.del') }}?id[]=";
+    urlDel =urlDel + id;
     swal({   
-        title: "Xóa sản phẩm này",
+        title: "Xóa sản phẩm này khỏi danh mục !",
         text: "",         
         type: "warning",   
         showCancelButton: true,   
@@ -82,23 +81,6 @@ function del(id){
             }
         }
     );
-};
-function active(active, id){
-    $.ajax({
-        url: '{{route('admin.product.active')}}',
-        type: 'get',
-        cache: false,
-        data: {
-            id:id,
-            active:active
-        },
-        success: function(data){
-            $('#active'+id).html(data);
-        },
-        error: function (){
-            alert('Có lỗi xảy ra');
-        }
-    });
 };
 
 setTimeout(function(){
@@ -120,7 +102,7 @@ setTimeout(function(){
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url":"{{ route('admin.product.view') }}",
+            "url":"{{ route('admin.category.product.view',['id_category'=>$objItem->id]) }}",
             "dataType":"json",
             "type":"POST",
             "data":{"_token":"{{ csrf_token() }}"}
@@ -145,13 +127,10 @@ setTimeout(function(){
             {"data":"name"},
             {"data":"product_code"},
             {"data":"price"},
-            {"data":"link_document"},
             {"data":"picture"},
-            {"data":"active"},
             {"data":"action"}
         ]
     });
-
     $(document).ready(function() {
     //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
         $("#form").validate({
@@ -177,14 +156,14 @@ setTimeout(function(){
                         function(isConfirm){
                             if(isConfirm){
                                 $.ajax({
-                                    url: '{{route('admin.product.del')}}',
+                                    url: '{{route('admin.category.product.del')}}',
                                     type: 'get',
                                     cache: false,
                                     data: {
                                         id:id,
                                     },
                                     success: function(data){
-                                        window.location.href="{{ route('admin.product.index') }}";   
+                                        window.location.href="{{ route('admin.category.product.index',['id_category'=>$objItem->id]) }}";   
                                     },
                                     error: function (){
                                         alert('Có lỗi xảy ra');

@@ -31,7 +31,6 @@
                             <tr>
                                 <th style="width: 10px;">#</th>
                                 <th>Tên slide</th>
-                                <th>Thời gian</th>
                                 <th>Giảm(%)</th>
                                 <th>Hình ảnh</th>
                                 <th>Số lượng sản phẩm</th>
@@ -41,19 +40,16 @@
                             @php
                                 $id = $objItem->id;
                                 $name = $objItem->name;
-                                $start = date('H:i d/m/Y',$objItem->start);
-                                $finish = date('H:i d/m/Y',$objItem->finish);
                                 $picture = $objItem->picture;
                                 $percent = $objItem->percent;
                                 $count_product = $objItem->count_product;
-                                $urlProduct = route('admin.sale.product.index',['id_sale'=>$id,'id_category'=>0]);
+                                $urlProduct = route('admin.sale.product.index',['id_sale'=>$id]);
                                 $urlEdit = route('admin.sale.edit',['id'=>$id]);
                                 $urlDel = route('admin.sale.del',['id'=>$id]);
                             @endphp
                             <tr>
                                 <td>{{ $stt + 1 }}</td>
                                 <td>{{ $name }}</td>
-                                <td>{{ $start." - ".$finish }}</td>
                                 <td>{{ $percent }} %</td>
                                 <td><img src="/storage/app/files/sale/{{ $picture }}" width="200px"></td>
                                 <td>{{ $count_product }}</td>

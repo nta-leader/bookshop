@@ -40,10 +40,9 @@ class ProductController extends Controller
                 'product.id', 
                 'product.name', 
                 'product.product_code', 
-                'sale.precent as sale_precent', 
                 'product.link_document',
                 'product.basis_price', 
-                DB::raw('product.basis_price*((100-sale.precent)/100) as price'),
+                DB::raw('product.basis_price*((100-sale.percent)/100) as price'),
                 'product.picture',
                 'product.active'
             )
@@ -60,10 +59,9 @@ class ProductController extends Controller
                 'product.id', 
                 'product.name', 
                 'product.product_code', 
-                'sale.precent as sale_precent', 
                 'product.link_document',
                 'product.basis_price', 
-                DB::raw('product.basis_price*((100-sale.precent)/100) as price'),
+                DB::raw('product.basis_price*((100-sale.percent)/100) as price'),
                 'product.picture',
                 'product.active'
             )
@@ -89,9 +87,9 @@ class ProductController extends Controller
                 $nestedData['name'] = $objItem->name;
                 $nestedData['product_code'] = $objItem->product_code;
                 if($objItem->basis_price == $objItem->price){
-                    $nestedData['price'] = 'Giá bán: '.number_format($objItem->price,0,'.',',').' đ';
+                    $nestedData['price'] = 'Giá bán: <span style="color:red;">'.number_format($objItem->price,0,'.',',').' đ</span>';
                 }else{
-                    $nestedData['price'] = 'Giá bán: '.number_format($objItem->price,0,'.',',').' đ <br>Giá gốc: '.number_format($objItem->basis_price,0,'.',',');
+                    $nestedData['price'] = 'Giá bán: <span style="color:red;">'.number_format($objItem->price,0,'.',',').' đ</span> <br>Giá gốc: '.number_format($objItem->basis_price,0,'.',',');
                 }
                 
                 $nestedData['link_document'] = '<a target="_blank" href="'.$objItem->link_document.'">Xem</a>';
