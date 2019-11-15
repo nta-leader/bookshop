@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2019 at 08:09 PM
+-- Generation Time: Nov 15, 2019 at 05:13 PM
 -- Server version: 5.7.27-0ubuntu0.16.04.1
 -- PHP Version: 7.3.11-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -54,6 +54,30 @@ INSERT INTO `category` (`id`, `name`, `url`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category_product`
+--
+
+CREATE TABLE `category_product` (
+  `id` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category_product`
+--
+
+INSERT INTO `category_product` (`id`, `id_category`, `id_product`) VALUES
+(4, 12, 1),
+(5, 12, 2),
+(6, 12, 3),
+(7, 14, 1),
+(8, 14, 2),
+(9, 14, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -71,6 +95,15 @@ CREATE TABLE `product` (
   `active` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `id_sale`, `product_code`, `name`, `url`, `picture`, `evaluate`, `content`, `basis_price`, `link_document`, `active`) VALUES
+(1, 1, 'LTMT', 'Luyện thi môn toán', 'luyen-thi-mon-toan', 'D83b3eCGrIUWoi2GwtoqboUUcCs6ESxGZ1F5xcgk.jpeg', 5, '<p>123</p>', '98000', '#', 1),
+(2, 1, 'LTML', 'Luyện thi môn lý', 'luyen-thi-mon-ly', 'gUQtHFFTpqERTcDhuMWi0WPy1AcA83fZCxvY6Jxe.jpeg', 5, '<p>123</p>', '98000', '#', 1),
+(3, 1, 'LTMH', 'Luyện thi môn hóa', 'luyen-thi-mon-hoa', '6P6GNymMoxtpUGtbs9pMNIIBwFWl9FhSUNrj6aXK.jpeg', 5, '<p>123</p>', '98000', '#', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -81,7 +114,7 @@ CREATE TABLE `sale` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `precent` int(3) NOT NULL,
+  `percent` int(3) NOT NULL,
   `picture` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -89,8 +122,10 @@ CREATE TABLE `sale` (
 -- Dumping data for table `sale`
 --
 
-INSERT INTO `sale` (`id`, `name`, `url`, `precent`, `picture`) VALUES
-(0, 'Mặc định', 'mac-dinh', 0, 'mac-dinh.jpg');
+INSERT INTO `sale` (`id`, `name`, `url`, `percent`, `picture`) VALUES
+(0, 'Mặc định', 'mac-dinh', 0, 'mac-dinh.jpg'),
+(1, 'BIG SALE', 'big-sale', 50, 'tk7HHqMIVENZ0yQLmiHLFOCizgF4zJZjwnNYYkh2.jpeg'),
+(2, '70%', '70', 70, 'GQec8eaq46G3b6fyLrJeT23nUvzar4ndEJzrREb5.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -100,6 +135,12 @@ INSERT INTO `sale` (`id`, `name`, `url`, `precent`, `picture`) VALUES
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category_product`
+--
+ALTER TABLE `category_product`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -124,15 +165,20 @@ ALTER TABLE `sale`
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
+-- AUTO_INCREMENT for table `category_product`
+--
+ALTER TABLE `category_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

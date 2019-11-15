@@ -7,6 +7,8 @@ use DB;
 
 class HomeModel extends Model
 {
+    protected $arrId=[];
+
     public function getSlides(){
         return DB::table('sale')->where('id','!=',0)->get();
     }
@@ -24,6 +26,22 @@ class HomeModel extends Model
         )
         ->where('product.active', 1)
         ->limit(20)
+        ->inRandomOrder()
         ->get();
+    }
+    public function getCategory(){
+        $category = DB::table('category')->where('parent_id', 0)->get();
+        $categoryAll = DB::table('category')->get();
+        foreach ($category as $key => $item) {
+            
+        }
+    }
+    public function getParent($data, $parent_id){
+        foreach ($data as $key => $item) {
+            if($item->parent_id == $parent_id){
+                $this->arrId[] = $item->id;
+                unset($data[$key]);
+            }
+        }
     }
 }
