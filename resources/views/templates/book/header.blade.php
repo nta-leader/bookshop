@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BootStrap HTML5 CSS3 Theme</title>
+	<title>@yield('title')</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="{{$urlTemplateBook}}/apple-touch-icon.png">
@@ -45,10 +45,7 @@
 									</a>
 								</li>
 							</ul>
-							<div class="tg-userlogin">
-								<figure><a href="javascript:void(0);"><img src="{{$urlTemplateBook}}/images/users/img-01.jpg" alt="image description"></a></figure>
-								<span>Hi, Melonie</span>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -57,14 +54,14 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<strong class="tg-logo"><a href="index.html"><img src="{{$urlTemplateBook}}/images/logo.png" alt="company name here"></a></strong>
+							<strong class="tg-logo"><a href="{{ route('book.home.index') }}"><img src="{{$urlTemplateBook}}/images/logo.png" alt="company name here"></a></strong>
 							<div class="tg-searchbox">
 								<form class="tg-formtheme tg-formsearch">
 									<fieldset>
-										<input type="text" name="search" class="typeahead form-control" placeholder="Search by title, author, keyword, ISBN...">
-										<button type="submit" class="tg-btn">Search</button>
+										<input type="text" name="search" class="typeahead form-control" placeholder="Tìm sách...">
+										<button type="submit" class="tg-btn">Tìm</button>
 									</fieldset>
-									<a href="javascript:void(0);">+  Advanced Search</a>
+									<a href="javascript:void(0);">Tìm sách nào</a>
 								</form>
 							</div>
 						</div>
@@ -89,10 +86,10 @@
 										<ul>
 											<li class="menu-item-has-children menu-item-has-mega-menu">
 												<a href="javascript:void(0);">DANH MỤC SÁCH</i></a>
-												@php indanhmuc_menu_public($category); @endphp
+												@php indanhmuc_menu_public($boot_category); @endphp
 											</li>
 											<li class="{{ Request::is('/') ? 'current-menu-item':''}}">
-												<a href="javascript:void(0);">Trang chủ</a>
+												<a href="{{ route('book.home.index') }}">Trang chủ</a>
 											</li>
 											<li><a href="products.html">Sự kiện Sale</a></li>
 											<li class="menu-item-has-children">
@@ -113,6 +110,7 @@
 									</div>
 								</nav>
 								<div class="tg-wishlistandcart">
+									
 									<div class="dropdown tg-themedropdown tg-minicartdropdown">
 										<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span class="tg-themebadge">3</span>
@@ -163,6 +161,12 @@
 												</div>
 											</div>
 										</div>
+									</div>
+									<div class="dropdown tg-themedropdown tg-wishlistdropdown">
+										<a href="javascript:void(0);" class="tg-btnthemedropdown">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</a>
+										
 									</div>
 								</div>
 							</div>

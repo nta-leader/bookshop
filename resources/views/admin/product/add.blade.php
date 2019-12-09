@@ -124,6 +124,21 @@
                             <label>link document</label>
                             <input type="text" name="link_document" value="{{ old('link_document') }}" class="form-control" placeholder="link đọc thử ">
                         </div>
+
+                        @if ($errors->has('preview'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('preview') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>giới thiệu</label>
+                            <textarea name="preview" class="form-control" rows="3" placeholder="Nhập giới thiệu ...">{{ old('preview') }}</textarea>
+                        </div>
+
                         @if ($errors->has('content'))
                             <div class="alert alert-danger error">
                                 <ul>

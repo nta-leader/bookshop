@@ -162,4 +162,14 @@ Route::namespace('Book')->group(function(){
         'uses'=>'ProductController@index',
         'as'=>'book.product.index'
     ]);
+    Route::prefix('su-kien-sale')->group(function(){
+        route::get('',[
+            'uses'=>'SaleController@index',
+            'as'=>'book.sale.index'
+        ]);
+        route::get('{url}.html',[
+            'uses'=>'SaleController@detail',
+            'as'=>'book.sale.detail'
+        ]);
+    });
 });

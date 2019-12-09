@@ -136,31 +136,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="tg-newsletter">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<h4>Signup Newsletter!</h4>
-							<h5>Consectetur adipisicing elit sed do eiusmod tempor incididunt.</h5>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<form class="tg-formtheme tg-formnewsletter">
-								<fieldset>
-									<input type="email" name="email" class="form-control" placeholder="Enter Your Email ID">
-									<button type="button"><i class="icon-envelope"></i></button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 			<div class="tg-footerbar">
 				<a id="tg-btnbacktotop" class="tg-btnbacktotop" href="javascript:void(0);"><i class="icon-chevron-up"></i></a>
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<span class="tg-paymenttype"><img src="{{$urlTemplateBook}}/images/paymenticon.png" alt="image description"></span>
-							<span class="tg-copyright">2017 All Rights Reserved By &copy; Book Library</span>
+							<span class="tg-copyright">Website được thiết kết bởi Theanhit</span>
 						</div>
 					</div>
 				</div>

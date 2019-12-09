@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         view::share('urlTemplateBook',getenv('TEMPLATE_BOOK'));
 
         $category = DB::table('category')->get();
-        view::share('category',$category);
+        view::share('boot_category', $category);
         
     }
 }

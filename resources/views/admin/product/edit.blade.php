@@ -39,6 +39,7 @@
                 $basis_price = $objItem->basis_price;
                 $link_document = $objItem->link_document;
                 $picture = $objItem->picture;
+                $preview = $objItem->preview;
                 $content = $objItem->content;
                 $evaluate = $objItem->evaluate;
                 $active = $objItem->active;
@@ -144,6 +145,20 @@
                         <div class="form-group">
                             <label>link document</label>
                             <input type="text" name="link_document" value="{{ $link_document }}" class="form-control" placeholder="link đọc thử ">
+                        </div>
+
+                        @if ($errors->has('preview'))
+                            <div class="alert alert-danger error">
+                                <ul>
+                                    @foreach ($errors->get('preview') as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>giới thiệu</label>
+                            <textarea name="preview" class="form-control" rows="3" placeholder="Nhập giới thiệu ...">{{ $preview }}</textarea>
                         </div>
 
                         @if ($errors->has('content'))

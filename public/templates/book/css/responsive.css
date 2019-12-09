@@ -440,7 +440,7 @@
 		width:100%;
 		margin:5px 0;
 	}
-	.tg-addnav{display:none;}
+	.tg-searchbox{display:none;}
 	.tg-themedropdown.tg-currencydropdown{
 		border:0;
 		padding:0;
@@ -482,8 +482,6 @@
 	.tg-newsgrid .row > [class*="col-"],
 	.tg-productgrid >  [class^="col-"],
 	.tg-productgrid > [class*="col-"],
-	.tg-formsortshoitems,
-	.tg-refinesearch > span,
 	.tg-booksfromauthor .row > [class^="col-"],
 	.tg-booksfromauthor .row > [class*="col-"],
 	.tg-authors > [class^="col-"],

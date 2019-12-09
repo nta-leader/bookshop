@@ -26,6 +26,7 @@ class CategoryModel extends Model
     public function del($id){
         $this->findParent($id, $this->getItems());
         $this->arrId[] = $id;
+        DB::table('category_product')->whereIn('id_category', $this->arrId)->delete();
         return $this->whereIn('id', $this->arrId)->delete();
     }
     private $arrId = [];

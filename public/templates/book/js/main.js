@@ -82,7 +82,7 @@ jQuery(document).on('ready', function() {
 				],
 		responsive: {
 			0: { items:2 },
-			480: { items:2 },
+			480: { items:3 },
 			600: { items:3 },
 			1000: { items:5 },
 			1200: { items:6 },
@@ -106,11 +106,11 @@ jQuery(document).on('ready', function() {
 					'owl-next tg-btnround tg-btnnext'
 				],
 		responsive: {
-			0: { items:1 },
+			0: { items:2 },
 			568: { items:2 },
 			768: { items:2 },
 			992: { items:3 },
-			1200: { items:4 },
+			1200: { items:5 },
 		}
 	});
 	/* -------------------------------------
@@ -230,10 +230,10 @@ jQuery(document).on('ready', function() {
 					'owl-next tg-btnround tg-btnnext'
 				],
 		responsive: {
-			0: { items:1 },
+			0: { items:2 },
 			600: { items:2 },
 			992: { items:3 },
-			1200: { items:4 },
+			1200: { items:5 },
 		}
 	});
 	/*--------------------------------------
@@ -277,7 +277,10 @@ jQuery(document).on('ready', function() {
 			PRODUCT INCREASE
 	------------------------------------------*/
 	jQuery('em.minus').on('click', function () {
-		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+		let quantity = jQuery('#quantity1').val();
+		if(quantity > 1){
+			jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+		}
 	});
 	jQuery('em.plus').on('click', function () {
 		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) + 1);
