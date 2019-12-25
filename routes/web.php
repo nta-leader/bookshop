@@ -154,6 +154,10 @@ Route::namespace('Book')->group(function(){
         'uses'=>'HomeController@index',
         'as'=>'book.home.index'
     ]);
+    Route::get('/gioi-thieu.html',[
+        'uses'=>'AboutController@index',
+        'as'=>'book.about.index'
+    ]);
     Route::get('/{url}.html',[
         'uses'=>'CategoryController@index',
         'as'=>'book.category.index'

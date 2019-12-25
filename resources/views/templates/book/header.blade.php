@@ -92,8 +92,8 @@
 												<a href="{{ route('book.home.index') }}">Trang chủ</a>
 											</li>
 											<li><a href="products.html">Sự kiện Sale</a></li>
-											<li class="menu-item-has-children">
-												<a href="javascript:void(0);">Giới thiệu</a>
+											<li class="{{ Request::is('gioi-thieu.html') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.about.index') }}">Giới thiệu</a>
 											</li>
 											<li><a href="products.html">Hướng dẫn</a></li>
 											<li><a href="products.html">Chính sách</a></li>

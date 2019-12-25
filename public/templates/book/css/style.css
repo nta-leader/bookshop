@@ -68,6 +68,9 @@ span.fa.fa-star {
 .tg-productdescription {
     margin-top: 40px;
 }
+ins#price {
+    color: red;
+}
 @media(max-width:991px){
     .tg-homeslider .item{
         height: 508px;
