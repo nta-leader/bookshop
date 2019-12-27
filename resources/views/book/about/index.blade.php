@@ -1,6 +1,6 @@
 @extends('templates.book.master')
 @section('title')
-Gới thiệu công ty
+{{ $objItem->name }}
 @endsection
 @section('content')
 <!--************************************
@@ -11,7 +11,7 @@ Gới thiệu công ty
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="tg-innerbannercontent">
-                    <h1>Giới thiệu</h1>
+                    <h1>{{ $objItem->name }}</h1>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@ Gới thiệu công ty
         <div class="container">
             <div class="row">
                 <div id="tg-twocolumns" class="tg-twocolumns">
-                    {!! $objItem->content; !!}
+                    {!! $objItem->about; !!}
                 </div>
             </div>
         </div>

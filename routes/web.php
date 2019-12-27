@@ -158,6 +158,14 @@ Route::namespace('Book')->group(function(){
         'uses'=>'AboutController@index',
         'as'=>'book.about.index'
     ]);
+    Route::get('/huong-dan-mua-sach.html',[
+        'uses'=>'AboutController@guarantee',
+        'as'=>'book.about.guarantee'
+    ]);
+    Route::get('/chinh-sach-bao-hanh.html',[
+        'uses'=>'AboutController@shopping_guide',
+        'as'=>'book.about.shopping_guide'
+    ]);
     Route::get('/{url}.html',[
         'uses'=>'CategoryController@index',
         'as'=>'book.category.index'

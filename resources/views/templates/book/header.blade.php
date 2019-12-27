@@ -95,8 +95,12 @@
 											<li class="{{ Request::is('gioi-thieu.html') ? 'current-menu-item' : '' }}">
 												<a href="{{ route('book.about.index') }}">Giới thiệu</a>
 											</li>
-											<li><a href="products.html">Hướng dẫn</a></li>
-											<li><a href="products.html">Chính sách</a></li>
+											<li class="{{ Request::is('huong-dan-mua-sach.html') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.about.shopping_guide') }}">Hướng dẫn</a>
+											</li>
+											<li class="{{ Request::is('chinh-sach-bao-hanh.html') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.about.guarantee') }}">Chính sách</a>
+											</li>
 											<li class="menu-item-has-children">
 												<a href="javascript:void(0);">Tin tức</a>
 												<ul class="sub-menu">

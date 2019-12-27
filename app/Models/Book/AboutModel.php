@@ -10,7 +10,13 @@ class AboutModel extends Model
     protected $primarKey = 'id';
     public $timestamps = false;
 
-    public function getItem(){
-        return $this->first();
+    public function getAboutUs(){
+        return $this->select('about')->first();
+    }
+    public function getShoppingGuide(){
+        return $this->select('shopping_guide')->first();
+    }
+    public function getGuarantee(){
+        return $this->select('guarantee')->first();
     }
 }
