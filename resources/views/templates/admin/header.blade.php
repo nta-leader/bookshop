@@ -55,10 +55,10 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="">
-            <a href=""><i class="fa fa-lock"></i> Đổi mật khẩu</a>
+            <a href="{{ route('auth.password') }}"><i class="fa fa-lock"></i> Đổi mật khẩu</a>
           </li>
           <li>
-            <a href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>
+            <a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
           </li>
         </ul>
       </div>

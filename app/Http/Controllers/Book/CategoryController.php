@@ -22,4 +22,26 @@ class CategoryController extends Controller
         $category = $category->getCategory();
         return view('book.category.index',compact('objItem','category'));
     }
+    public function search(CategoryModel $category, Request $request){
+        $key = $request->search;
+        
+        if($key != null){
+            $request->session()->put('search', $key);
+        }else{
+            $key = $request->session()->get('search');
+        }
+        $request->session()->put('search',$key);
+        if($request->has('orderby')){
+            $orderby = $request->get('orderby');
+            $request->session()->put('orderby', $orderby);
+        }elseif($request->session()->has('orderby')){
+            $orderby = $request->session()->get('orderby');
+        }else{
+            $orderby = 'sp-m';
+        }
+        $objItem = json_decode('{"name":"Tìm kiếm:'.$key.'"}');
+        $objItem->products = $category->getSearch($key, $orderby);
+        $category = $category->getCategory();
+        return view('book.category.index',compact('objItem','category'));
+    }
 }

@@ -67,7 +67,8 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<strong class="tg-logo"><a href="{{ route('book.home.index') }}"><img src="{{$urlTemplateBook}}/images/logo.png" alt="company name here"></a></strong>
 							<div class="tg-searchbox">
-								<form action="" method="get" class="tg-formtheme tg-formsearch">
+								<form action="{{ route('book.category.search') }}" method="get" class="tg-formtheme tg-formsearch">
+								{{ csrf_field() }}
 									<fieldset>
 										<input type="text" name="search" class="typeahead form-control" placeholder="Tìm sách...">
 										<button type="submit" class="tg-btn">Tìm</button>
@@ -178,7 +179,8 @@
 											<i class="fa fa-search" aria-hidden="true"></i>
 										</a>
 										<div class="book-search">
-											<form action="" method="get">
+											<form action="{{ route('book.category.search') }}" method="get">
+												{{ csrf_field() }}
 												<a href="javascript:void(0);" class="mobile-search"><i class="fa fa-times" aria-hidden="true"></i></a>
 												<input type="text" name="search" placeholder="Tìm sách...">
 												<button><i class="fa fa-search" aria-hidden="true"></i></button>

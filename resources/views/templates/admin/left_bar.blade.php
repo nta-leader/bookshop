@@ -88,11 +88,6 @@
             <i class="fa fa-edit"></i> <span >Quản lý bài viết</span>
           </a>
         </li>
-        <li class="{{ Request::is('admin/buy-more*') ? 'active' : '' }}">
-          <a href="" title="Sau khi đặt hàng sẽ xuất hiện những sản phẩm này !">
-            <i class="fa fa-envelope"></i> <span>Phản hồi khách hành</span>
-          </a>
-        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

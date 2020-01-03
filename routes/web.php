@@ -1,5 +1,27 @@
 <?php
-Route::namespace('Admin')->prefix('admin')->group(function(){
+Route::namespace('Auth')->group(function(){
+    Route::get('/login',[
+        'uses'=>'AuthController@login',
+        'as'=>'auth.login'
+    ]);
+    Route::post('/login',[
+        'uses'=>'AuthController@postLogin',
+        'as'=>'auth.login'
+    ]);
+    Route::get('/password',[
+        'uses'=>'AuthController@password',
+        'as'=>'auth.password'
+    ])->middleware('auth');
+    Route::post('/password',[
+        'uses'=>'AuthController@postPassword',
+        'as'=>'auth.password'
+    ])->middleware('auth');
+    Route::get('/logout',[
+        'uses'=>'AuthController@logout',
+        'as'=>'auth.logout'
+    ]);
+});
+Route::namespace('Admin')->prefix('admin')->middleware('auth')->group(function(){
     Route::prefix('home')->group(function(){
         Route::get('index',[
             'uses'=>'HomeController@index',
@@ -279,6 +301,10 @@ Route::namespace('Book')->group(function(){
     Route::get('/huong-dan-mua-sach.html',[
         'uses'=>'AboutController@shopping_guide',
         'as'=>'book.about.shopping_guide'
+    ]);
+    Route::get('/tim-kiem.html',[
+        'uses'=>'CategoryController@search',
+        'as'=>'book.category.search'
     ]);
     Route::get('/{url}.html',[
         'uses'=>'CategoryController@index',
