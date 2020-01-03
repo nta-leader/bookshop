@@ -101,6 +101,43 @@
 </div>
 <!-- /.modal -->
 <script>
+function del(id){
+    var urlDel = "{{ route('admin.product.del') }}?id[]=";
+    urlDel +=id;
+    swal({   
+        title: "Xóa sản phẩm này",
+        text: "",         
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "OK",   
+        cancelButtonText: "Hủy",   
+        closeOnConfirm: false,   
+        }, 
+        function(isConfirm){   
+            if (isConfirm) {   
+                window.location.href=urlDel;   
+            }
+        }
+    );
+};
+function active(active, id){
+    $.ajax({
+        url: '{{route('admin.product.active')}}',
+        type: 'get',
+        cache: false,
+        data: {
+            id:id,
+            active:active
+        },
+        success: function(data){
+            $('#active'+id).html(data);
+        },
+        error: function (){
+            alert('Có lỗi xảy ra');
+        }
+    });
+};
 function number_format( number, decimals, dec_point, thousands_sep ) {
 	var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
 	var d = dec_point == undefined ? "," : dec_point;
@@ -143,7 +180,7 @@ function detail(id){
             document.getElementById('products').innerHTML = div;
 
             let modalfooter = '<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Thoát</button>'+
-                                '<button onclick="update('+data.id+',1)" type="button" class="btn btn-primary">Xác nhận đơn</button>'+
+                                '<button onclick="update('+data.id+',2)" type="button" class="btn btn-success">Xác nhận đơn</button>'+
                                 '<button onclick="update('+data.id+',-1)" type="button" class="btn btn-danger">Hủy đơn</button>';
             document.getElementById('modal-footer').innerHTML = modalfooter;
 
@@ -155,41 +192,74 @@ function detail(id){
 };
 function update(id,active){
     let title="";
-    if(active==1){
-        title="Bạn muốn xác nhận đơn hàng này không !";
+    if(active==2){
+        title="Bạn đã đóng gói sản phẩm này !";
+        let text = 'Vui lòng nhập mã vận đơn !';
+        swal({
+            title: title,
+            text: text,
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            inputPlaceholder: "Nhập mã vận đơn !"
+            }, function (inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showInputError("Mã vận đơn không được để trống !");
+                return false
+            }
+            $.ajax({
+                url: '{{route('admin.orderform.update')}}',
+                type: 'get',
+                cache: false,
+                data: {
+                    id:id,
+                    active:active,
+                    waybill_code:inputValue
+                },
+                success: function(data){
+                    swal("Hoàn thành!","", "success");
+                    location.reload();
+                },
+                error: function (){
+                    alert('Có lỗi xảy ra');
+                }
+            });
+            
+        });
     }else if(active==-1){
         title="Bạn muốn hủy đơn hàng này không !";
-    }
-    swal({   
-        title: title,
-        text: "",         
-        type: "warning",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: "OK",   
-        cancelButtonText: "Hủy",   
-        closeOnConfirm: false,   
-        }, 
-        function(isConfirm){
-            if(isConfirm){
-                $.ajax({
-                    url: '{{route('admin.orderform.update')}}',
-                    type: 'get',
-                    cache: false,
-                    data: {
-                        id:id,
-                        active:active
-                    },
-                    success: function(data){
-                        location.reload();   
-                    },
-                    error: function (){
-                        alert('Có lỗi xảy ra');
-                    }
-                });
+        swal({   
+            title: title,
+            text: "",         
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "OK",   
+            cancelButtonText: "Hủy",   
+            closeOnConfirm: false,   
+            }, 
+            function(isConfirm){
+                if(isConfirm){
+                    $.ajax({
+                        url: '{{route('admin.orderform.update')}}',
+                        type: 'get',
+                        cache: false,
+                        data: {
+                            id:id,
+                            active:active
+                        },
+                        success: function(data){
+                            location.reload();  
+                        },
+                        error: function (){
+                            alert('Có lỗi xảy ra');
+                        }
+                    });
+                }
             }
-        }
-    );
+        );
+    }   
 }
 setTimeout(function(){
     var msg = document.getElementsByClassName("msg");
@@ -210,7 +280,7 @@ setTimeout(function(){
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url":"{{ route('admin.orderform.apiindex') }}",
+            "url":"{{ route('admin.orderform.apiconfirmed') }}",
             "dataType":"json",
             "type":"POST",
             "data":{"_token":"{{ csrf_token() }}"}

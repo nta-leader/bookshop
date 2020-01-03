@@ -42,46 +42,55 @@
             <i class="fa fa-pie-chart"></i>
             <span>Đơn hàng</span>
             <span class="pull-right-container">
-              <small class="label pull-left bg-yellow">1</small>
-              <small class="label pull-left bg-green">1</small>
-              <small class="label pull-left bg-red">1</small>
+              <small class="label pull-left bg-yellow">{{ $boot_count_order }}</small>
+              <small class="label pull-left bg-blue">{{ $boot_count_order_confirmed }}</small>
+              <small class="label pull-left bg-green">{{ $boot_count_order_success }}</small>
+              <small class="label pull-left bg-red">{{ $boot_count_order_cancel }}</small>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: {{ Request::is('admin/order-form*') ? 'block':'none' }};">
-            <li class="{{ Request::is('admin/order-form/index') ? 'active':'' }}">
-              <a href="">
+          <ul class="treeview-menu" style="display: {{ Request::is('admin/orderform*') ? 'block':'none' }};">
+            <li class="{{ Request::is('admin/orderform/index') ? 'active':'' }}">
+              <a href="{{ route('admin.orderform.index') }}">
                 <i class="fa fa-circle-o"></i>Đơn hàng mới
                 <span class="pull-right-container">
-                  <small class="label pull-right bg-yellow">1</small>
+                  <small class="label pull-right bg-yellow">{{ $boot_count_order }}</small>
                 </span>
               </a>
             </li>
-            <li class="{{ Request::is('admin/order-form/confirm') ? 'active':'' }}">
-              <a href="">
+            <li class="{{ Request::is('admin/orderform/confirmed') ? 'active':'' }}">
+              <a href="{{ route('admin.orderform.confirmed') }}">
                 <i class="fa fa-circle-o"></i> Đơn hàng đã xác nhận
                 <span class="pull-right-container">
-                  <small class="label pull-left bg-green">1</small>
+                  <small class="label pull-left bg-blue">{{ $boot_count_order_confirmed }}</small>
                 </span>
               </a>
             </li>
-            <li class="{{ Request::is('admin/order-form/cancel-order') ? 'active':'' }}">
-              <a href="">
+            <li class="{{ Request::is('admin/orderform/success') ? 'active':'' }}">
+              <a href="{{ route('admin.orderform.success') }}">
+                <i class="fa fa-circle-o"></i> Đơn hàng đóng gói
+                <span class="pull-right-container">
+                  <small class="label pull-left bg-green">{{ $boot_count_order_success }}</small>
+                </span>
+              </a>
+            </li>
+            <li class="{{ Request::is('admin/orderform/cancel') ? 'active':'' }}">
+              <a href="{{ route('admin.orderform.cancel') }}">
                 <i class="fa fa-circle-o"></i> Đơn hàng hủy
                 <span class="pull-right-container">
-                  <small class="label pull-left bg-red">1</small>
+                  <small class="label pull-left bg-red">{{ $boot_count_order_cancel }}</small>
                 </span>
               </a>
             </li>
           </ul>
         </li>
-        <li class="{{ Request::is('admin/mail*') ? 'active' : '' }}">
-          <a href="" title="Khi có đơn hàng mới sẽ thông báo đến mail">
-            <i class="fa fa-envelope"></i> <span >Quản lý mail</span>
+        <li class="{{ Request::is('admin/news*') ? 'active' : '' }}">
+          <a href="{{ route('admin.news.index') }}" title="Quản lý bài viết">
+            <i class="fa fa-edit"></i> <span >Quản lý bài viết</span>
           </a>
         </li>
         <li class="{{ Request::is('admin/buy-more*') ? 'active' : '' }}">
           <a href="" title="Sau khi đặt hàng sẽ xuất hiện những sản phẩm này !">
-            <i class="fa fa-book"></i> <span>Quản lý mua thêm</span>
+            <i class="fa fa-envelope"></i> <span>Phản hồi khách hành</span>
           </a>
         </li>
       </ul>

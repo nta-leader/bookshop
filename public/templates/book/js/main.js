@@ -277,12 +277,66 @@ jQuery(document).on('ready', function() {
 			PRODUCT INCREASE
 	------------------------------------------*/
 	jQuery('em.minus').on('click', function () {
-		let quantity = jQuery('#quantity1').val();
+		let quantity = jQuery('#quantity').val();
 		if(quantity > 1){
-			jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+			jQuery('#quantity').val(parseInt(jQuery('#quantity').val(), 10) - 1);
 		}
 	});
 	jQuery('em.plus').on('click', function () {
-		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) + 1);
+		jQuery('#quantity').val(parseInt(jQuery('#quantity').val(), 10) + 1);
 	});
+
+	
+
 });
+
+document.addEventListener("DOMContentLoaded",function(){
+	let search = document.getElementsByClassName('mobile-search');
+	for(let i=0; i<search.length; i++){
+		search[i].onclick = function(){
+			let show = document.querySelector('.book-search');
+			show.classList.toggle('display-block');
+		}
+	}
+},false)
+
+function number_format( number, decimals, dec_point, thousands_sep ) {
+	var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
+	var d = dec_point == undefined ? "," : dec_point;
+	var t = thousands_sep == undefined ? "." : thousands_sep, s = n < 0 ? "-" : "";
+	var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+							
+	return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}
+
+function showCart(data){
+	let price = 0; 
+	let div ="";
+	let about_bottom = document.getElementsByClassName('tg-minicartfoot');
+	if(data.length == 0){
+		div = '<div class="tg-minicarproduct">'+
+				'<span class="cart-null">Giỏ hàng rỗng !</span>'
+			'</div>';
+		
+		about_bottom[0].style.display = 'none';
+	}else{
+		data.forEach(function (item) {
+			price += item.price*item.quantity;
+			div += '<div class="tg-minicarproduct">'+
+					'<figure>'+
+						'<img style="height:70px" src="/storage/app/files/product/'+ item.picture +'" alt="'+ item.name +'">'+
+					'</figure>'+
+					'<div class="tg-minicarproductdata">'+
+						'<h5><a href="javascript:void(0);">'+ item.name +'</a></h5>'+
+						'<h6><a href="javascript:void(0);">'+ number_format(item.price,0,'.',',') +'đ</a> <a href="javascript:void(0);" class="btn-quantity" onclick="update('+ item.id_product +',-1,'+item.quantity+')">-</a><a class="btn-quantity">'+item.quantity+'</a><a href="javascript:void(0);" class="btn-quantity" onclick="update('+ item.id_product +',1)">+</a> <a href="javascript:void(0);" onclick="update('+ item.id_product +',0)"><i class="fa fa-trash-o"></i> xóa</a></h6>'+
+					'</div>'+
+				'</div>';
+		});
+
+		about_bottom[0].style.display = 'block';
+	}
+	
+	document.querySelector('#tg-themebadge').innerHTML=data.length;
+	document.querySelector('#tg-minicartbody').innerHTML=div;
+	document.querySelector('#tg-subtotal').innerHTML= number_format(price,0,'.',',') + 'đ';
+}

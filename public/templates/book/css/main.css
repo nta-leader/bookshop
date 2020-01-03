@@ -1484,10 +1484,7 @@ li.menu-item-has-mega-menu { position: static; }
 	line-height: 48px;
 }
 .tg-homeslider .owl-nav{
-	top:50%;
-	height:70px;
-	margin: -35px 0 0;
-	position:absolute;
+	
 }
 .tg-homeslider .owl-nav .tg-btnround{
 	margin:0;

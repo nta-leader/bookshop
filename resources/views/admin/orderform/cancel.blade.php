@@ -143,8 +143,7 @@ function detail(id){
             document.getElementById('products').innerHTML = div;
 
             let modalfooter = '<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Thoát</button>'+
-                                '<button onclick="update('+data.id+',1)" type="button" class="btn btn-primary">Xác nhận đơn</button>'+
-                                '<button onclick="update('+data.id+',-1)" type="button" class="btn btn-danger">Hủy đơn</button>';
+                                '<button onclick="update('+data.id+',1)" type="button" class="btn btn-primary">Đặt lại đơn</button>';
             document.getElementById('modal-footer').innerHTML = modalfooter;
 
         },
@@ -181,7 +180,7 @@ function update(id,active){
                         active:active
                     },
                     success: function(data){
-                        location.reload();   
+                        location.reload();
                     },
                     error: function (){
                         alert('Có lỗi xảy ra');
@@ -210,7 +209,7 @@ setTimeout(function(){
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url":"{{ route('admin.orderform.apiindex') }}",
+            "url":"{{ route('admin.orderform.cancel') }}",
             "dataType":"json",
             "type":"POST",
             "data":{"_token":"{{ csrf_token() }}"}

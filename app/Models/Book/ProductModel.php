@@ -24,6 +24,18 @@ class ProductModel extends Model
         ->where('product.url', $url)
         ->first();
     }
+    public function getItemId($id){
+        return DB::table('product')
+        ->join('sale','product.id_sale','=','sale.id')
+        ->select(
+            'product.id',
+            'product.name',
+            'product.picture',
+            DB::raw('product.basis_price * (100 - sale.percent)/100 as price')
+        )
+        ->where('product.id', $id)
+        ->first();
+    }
     public function getCategoryProduct($id_product){
         return DB::table('category_product')
         ->join('category','category.id','=','category_product.id_category')

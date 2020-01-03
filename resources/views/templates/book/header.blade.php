@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="{{$urlTemplateBook}}/css/main.css">
 	<link rel="stylesheet" href="{{$urlTemplateBook}}/css/color-purple.css">
 	<link rel="stylesheet" href="{{$urlTemplateBook}}/css/responsive.css">
+	<link rel="stylesheet" href="{{ $urlTemplateBook }}/sweetalert.css">
 	<link rel="stylesheet" href="{{$urlTemplateBook}}/css/style.css">
 	<script src="{{$urlTemplateBook}}/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
@@ -35,13 +36,23 @@
 								<li>
 									<a href="javascript:void(0);">
 										<i class="fa fa-phone" aria-hidden="true"></i>
-										<em>09.194.194.96</em>
+										@php
+											$arrPhone = explode('|',$boot_about->phone);
+										@endphp
+										@foreach($arrPhone as $phone)
+										<em>{{ $phone }}</em>
+										@endforeach
 									</a>
 								</li>
 								<li>
 									<a href="javascript:void(0);">
 										<i class="fa fa-envelope" aria-hidden="true"></i>
-										<em>Theanhit.com@gmail.com</em>
+										@php
+											$arrEmail = explode('|',$boot_about->email);
+										@endphp
+										@foreach($arrEmail as $email)
+										<em>{{ $email }}</em>
+										@endforeach
 									</a>
 								</li>
 							</ul>
@@ -56,7 +67,7 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<strong class="tg-logo"><a href="{{ route('book.home.index') }}"><img src="{{$urlTemplateBook}}/images/logo.png" alt="company name here"></a></strong>
 							<div class="tg-searchbox">
-								<form class="tg-formtheme tg-formsearch">
+								<form action="" method="get" class="tg-formtheme tg-formsearch">
 									<fieldset>
 										<input type="text" name="search" class="typeahead form-control" placeholder="Tìm sách...">
 										<button type="submit" class="tg-btn">Tìm</button>
@@ -91,37 +102,48 @@
 											<li class="{{ Request::is('/') ? 'current-menu-item':''}}">
 												<a href="{{ route('book.home.index') }}">Trang chủ</a>
 											</li>
-											<li><a href="products.html">Sự kiện Sale</a></li>
+											<li class="{{ Request::is('su-kien-sale') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.sale.index') }}">Sự kiện Sale</a>
+											</li>
 											<li class="{{ Request::is('gioi-thieu.html') ? 'current-menu-item' : '' }}">
 												<a href="{{ route('book.about.index') }}">Giới thiệu</a>
 											</li>
 											<li class="{{ Request::is('huong-dan-mua-sach.html') ? 'current-menu-item' : '' }}">
 												<a href="{{ route('book.about.shopping_guide') }}">Hướng dẫn</a>
 											</li>
-											<li class="{{ Request::is('chinh-sach-bao-hanh.html') ? 'current-menu-item' : '' }}">
+											<li class="{{ Request::is('chinh-sach-mua-hang.html') ? 'current-menu-item' : '' }}">
 												<a href="{{ route('book.about.guarantee') }}">Chính sách</a>
 											</li>
-											<li class="menu-item-has-children">
-												<a href="javascript:void(0);">Tin tức</a>
-												<ul class="sub-menu">
-													<li><a href="newslist.html">News List</a></li>
-													<li><a href="newsgrid.html">News Grid</a></li>
-													<li><a href="newsdetail.html">News Detail</a></li>
-												</ul>
+											<li class="{{ Request::is('tin-tuc') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.news.index') }}">Tin tức</a>
 											</li>
-											<li><a href="contactus.html">Liên hệ</a></li>
+											<li class="{{ Request::is('lien-he.html') ? 'current-menu-item' : '' }}">
+												<a href="{{ route('book.contact.index') }}">Liên hệ</a>
+											</li>
 										</ul>
 									</div>
 								</nav>
 								<div class="tg-wishlistandcart">
-									
 									<div class="dropdown tg-themedropdown tg-minicartdropdown">
-										<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="tg-themebadge">3</span>
+										<a href="{{ route('book.cart.checkwaybillcode') }}"  class="tg-btnthemedropdown" title="Kiểm tra tình trạng đơn hàng">
+											<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+										</a>
+									</div>
+									<div class="dropdown tg-themedropdown tg-minicartdropdown">
+										<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown tg-minicart-o">
+											<span class="tg-themebadge" id="tg-themebadge">0</span>
 											<i class="icon-cart"></i>
 										</a>
-										<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
+										<div class="dropdown-menu tg-themedropdownmenu" id="view-cart" aria-labelledby="tg-minicart">
 											<div class="tg-minicartbody">
+												<div class="tg-minicarproduct">
+													<figure style="width:100%">
+														<span>Giỏ hàng</span><span style="position: absolute;right: -30px;"><a class="tg-minicart-o" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></span>													
+													</figure>
+												</div>
+												
+											</div>
+											<div class="tg-minicartbody" id="tg-minicartbody">
 												<div class="tg-minicarproduct">
 													<figure>
 														<img src="{{$urlTemplateBook}}/images/products/img-01.jpg" alt="image description">
@@ -132,45 +154,36 @@
 														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
 													</div>
 												</div>
-												<div class="tg-minicarproduct">
-													<figure>
-														<img src="{{$urlTemplateBook}}/images/products/img-02.jpg" alt="image description">
-														
-													</figure>
-													<div class="tg-minicarproductdata">
-														<h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
-														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
-													</div>
-												</div>
-												<div class="tg-minicarproduct">
-													<figure>
-														<img src="{{$urlTemplateBook}}/images/products/img-03.jpg" alt="image description">
-														
-													</figure>
-													<div class="tg-minicarproductdata">
-														<h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
-													</div>
-												</div>
+												
 											</div>
 											<div class="tg-minicartfoot">
-												<a class="tg-btnemptycart" href="javascript:void(0);">
+												<a class="tg-btnemptycart" onclick="delCart()" href="javascript:void(0);">
 													<i class="fa fa-trash-o"></i>
-													<span>Clear Your Cart</span>
+													<span>Hủy giỏ hàng</span>
 												</a>
-												<span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
-												<div class="tg-btns">
-													<a class="tg-btn tg-active" href="javascript:void(0);">View Cart</a>
-													<a class="tg-btn" href="javascript:void(0);">Checkout</a>
-												</div>
+												<span class="tg-subtotal">Tổng: <strong id="tg-subtotal">35.78</strong></span>
+												<form action="javascript:void(0)" id="order_form">
+													<input type="text" id="name" name="name" value="" class="form-control input-cart" placeholder="Họ tên*">
+													<input type="text" id="phone" name="phone" value="" class="form-control input-cart" placeholder="Số điện thoại*">
+													<input type="text" id="address"" name="address"" value="" class="form-control input-cart" placeholder="Địa chỉ*">
+													<div class="tg-btns">
+														<button type="submit" class="tg-btn" href="javascript:void(0);">Đặt hàng</button>
+													</div>
+												</form>												
 											</div>
 										</div>
 									</div>
 									<div class="dropdown tg-themedropdown tg-wishlistdropdown">
-										<a href="javascript:void(0);" class="tg-btnthemedropdown">
+										<a href="javascript:void(0);" class="tg-btnthemedropdown mobile-search">
 											<i class="fa fa-search" aria-hidden="true"></i>
 										</a>
-										
+										<div class="book-search">
+											<form action="" method="get">
+												<a href="javascript:void(0);" class="mobile-search"><i class="fa fa-times" aria-hidden="true"></i></a>
+												<input type="text" name="search" placeholder="Tìm sách...">
+												<button><i class="fa fa-search" aria-hidden="true"></i></button>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>

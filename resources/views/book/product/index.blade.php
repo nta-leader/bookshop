@@ -36,6 +36,7 @@ The gioi sach
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
                         <div id="tg-content" class="tg-content">
                             @php
+                                $id = $objItem->id;
                                 $name = $objItem->name;
                                 $evaluate = $objItem->evaluate;
                                 $picture = $objItem->picture;
@@ -59,14 +60,10 @@ The gioi sach
                                                 </span>
                                                 <div class="tg-quantityholder">
                                                     <em class="minus">-</em>
-                                                    <input type="text" data-basis_price="{{ $basis_price }}" data-price="{{ $price }}" class="result" value="1" id="quantity1" name="quantity">
+                                                    <input type="text" class="result" value="1" id="quantity" name="quantity">
                                                     <em class="plus">+</em>
                                                 </div>
-                                                <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Thêm vảo giỏ hàng</a>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                    <span>mua ngay</span>
-                                                </a>
-                                                
+                                                <a id="add-product" data-id_product="{{ $id }}" class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Thêm vảo giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>
@@ -98,11 +95,11 @@ The gioi sach
                                             </span>
                                            
                                             <div class="tg-sectionhead">
-                                                <h3>Gới thiệu</h3>
+                                                <h3>Giới thiệu</h3>
                                             </div>
                                             <div class="tg-description">
                                                 {!! $priview !!}
-                                            </div>
+                                            </div>`
                                         </div>
                                     </div>
                                     

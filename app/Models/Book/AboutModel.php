@@ -14,9 +14,9 @@ class AboutModel extends Model
         return $this->select('about')->first();
     }
     public function getShoppingGuide(){
-        return $this->select('shopping_guide')->first();
+        return $this->select('shopping_guide as about')->first();
     }
     public function getGuarantee(){
-        return $this->select('guarantee')->first();
+        return $this->select('guarantee as about')->first();
     }
 }

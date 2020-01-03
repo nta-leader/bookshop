@@ -30,7 +30,7 @@
                     </button>
                 </div>
             </div>
-            <form role="form" method="POST" action="#" enctype="multipart/form-data">
+            <form role="form" method="POST" action="{{ route('admin.home.index') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="box-body">
                     @if(Session::has('msg'))
@@ -38,13 +38,15 @@
                     @endif
                     <div class="row">
                         @php
-                            $name = "";
-                            $address = "";
-                            $phone = "";
-                            $email = "";
-                            $facebook = "";
-                            $preview = "";
-                            $content = "";
+                            $name = $objItem->name;
+                            $address = $objItem->address;
+                            $phone = $objItem->phone;
+                            $email = $objItem->email;
+                            $facebook = $objItem->facebook;
+                            $work_time = $objItem->work_time;
+                            $about = $objItem->about;
+                            $guarantee = $objItem->guarantee;
+                            $shopping_guide = $objItem->shopping_guide;
                         @endphp
                         <div class="col-md-6">
                             @if ($errors->has('name'))
@@ -75,18 +77,18 @@
                                 <input type="text" name="address" value="{{ $address }}" class="form-control" placeholder="Nhập tên bài viết">
                             </div>
 
-                            @if ($errors->has('preview'))
+                            @if ($errors->has('work_time'))
                                 <div class="alert alert-danger error">
                                     <ul>
-                                        @foreach ($errors->get('preview') as $error)
+                                        @foreach ($errors->get('work_time') as $error)
                                             <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 </div>
                             @endif
                             <div class="form-group">
-                                <label>Giới thiệu</label>
-                                <textarea name="preview" class="form-control" rows="3" placeholder="Nhập giới thiệu ...">{{ $preview }}</textarea>
+                                <label>Thời gian làm việc</label>
+                                <input type="text" name="work_time"" value="{{ $work_time }}" class="form-control" placeholder="Nhập tên bài viết">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -144,8 +146,16 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label>Chi tiết</label>
-                        <textarea name="content" id="ckeditor1" class="form-control" rows="3" placeholder="Nhập chi tiết ...">{{ $content }}</textarea>
+                        <label>Gới thiệu</label>
+                        <textarea name="about"" id="ckeditor1" class="form-control" rows="3" placeholder="Viết giới thiệu ...">{{ $about }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hướng dẫn mua hàng</label>
+                        <textarea name="shopping_guide" id="ckeditor2" class="form-control" rows="3" placeholder="Viết bài hướng dẫn mua hàng...">{{ $shopping_guide }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Chính sách</label>
+                        <textarea name="guarantee" id="ckeditor3" class="form-control" rows="3" placeholder="Viết bài chính sách mua hàng ...">{{ $guarantee }}</textarea>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -164,6 +174,8 @@
 <script>
 $(document).ready(function () {
     CKEDITOR.replace( 'ckeditor1' );
+    CKEDITOR.replace( 'ckeditor2' );
+    CKEDITOR.replace( 'ckeditor3' );
 })
 setTimeout(function(){
     var msg = document.getElementsByClassName("msg");

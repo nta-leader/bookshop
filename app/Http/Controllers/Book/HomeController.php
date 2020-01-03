@@ -12,6 +12,7 @@ class HomeController extends Controller
         $slides = $home->getSlides();
         $sale = $home->getSale();
         $categorys = $home->getCategory();
-        return view('book.home.index',compact('slides','sale','categorys'));
+        $news = $home->getNews();
+        return view('book.home.index',compact('slides','sale','categorys','news'));
     }
 }

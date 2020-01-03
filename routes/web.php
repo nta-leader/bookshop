@@ -5,6 +5,10 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
             'uses'=>'HomeController@index',
             'as'=>'admin.home.index'
         ]);
+        Route::post('index',[
+            'uses'=>'HomeController@edit',
+            'as'=>'admin.home.index'
+        ]);
     });
     Route::prefix('category')->group(function(){
         Route::get('index',[
@@ -148,8 +152,114 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
             ]);
         });
     });
+    Route::prefix('news')->group(function(){
+        Route::get('index',[
+            'uses'=>'NewsController@index',
+            'as'=>'admin.news.index'
+        ]);
+        Route::post('view',[
+            'uses'=>'NewsController@view',
+            'as'=>'admin.news.view'
+        ]);
+        Route::get('add',[
+            'uses'=>'NewsController@add',
+            'as'=>'admin.news.add'
+        ]);
+        Route::post('add',[
+            'uses'=>'NewsController@postAdd',
+            'as'=>'admin.news.add'
+        ]);
+        Route::get('edit/{id}',[
+            'uses'=>'NewsController@edit',
+            'as'=>'admin.news.edit'
+        ]);
+        Route::post('edit/{id}',[
+            'uses'=>'NewsController@postEdit',
+            'as'=>'admin.news.edit'
+        ]);
+        Route::get('active',[
+            'uses'=>'NewsController@active',
+            'as'=>'admin.news.active'
+        ]);
+        Route::get('del',[
+            'uses'=>'NewsController@del',
+            'as'=>'admin.news.del'
+        ]);
+    });
+    Route::prefix('orderform')->group(function(){
+        Route::get('index',[
+            'uses'=>'OrderformController@index',
+            'as'=>'admin.orderform.index'
+        ]);
+        Route::post('index',[
+            'uses'=>'OrderformController@api_index',
+            'as'=>'admin.orderform.apiindex'
+        ]);
+        Route::get('confirmed',[
+            'uses'=>'OrderformController@confirmed',
+            'as'=>'admin.orderform.confirmed'
+        ]);
+        Route::post('confirmed',[
+            'uses'=>'OrderformController@api_confirmed',
+            'as'=>'admin.orderform.apiconfirmed'
+        ]);
+        Route::get('success',[
+            'uses'=>'OrderformController@success',
+            'as'=>'admin.orderform.success'
+        ]);
+        Route::post('success',[
+            'uses'=>'OrderformController@api_success',
+            'as'=>'admin.orderform.apisuccess'
+        ]);
+        Route::get('cancel',[
+            'uses'=>'OrderformController@cancel',
+            'as'=>'admin.orderform.cancel'
+        ]);
+        Route::post('cancel',[
+            'uses'=>'OrderformController@api_cancel',
+            'as'=>'admin.orderform.apicancel'
+        ]);
+        Route::get('detail',[
+            'uses'=>'OrderformController@detail',
+            'as'=>'admin.orderform.detail'
+        ]);
+        Route::get('update',[
+            'uses'=>'OrderformController@update',
+            'as'=>'admin.orderform.update'
+        ]);
+        Route::get('del',[
+            'uses'=>'ProductController@del',
+            'as'=>'admin.product.del'
+        ]);
+    });
 });
 Route::namespace('Book')->group(function(){
+    Route::prefix('gio-hang')->group(function(){
+        Route::get('',[
+            'uses'=>'CartController@index',
+            'as'=>'book.cart.index'
+        ]);
+        Route::get('kiem-tra-don-hang',[
+            'uses'=>'CartController@check_waybill_code',
+            'as'=>'book.cart.checkwaybillcode'
+        ]);
+        Route::get('them-san-pham-vao-gio-hang',[
+            'uses'=>'CartController@addProduct',
+            'as'=>'book.cart.addProduct'
+        ]);
+        Route::get('cap-nhat-so-luong',[
+            'uses'=>'CartController@update',
+            'as'=>'book.cart.update'
+        ]);
+        Route::get('dat-hang',[
+            'uses'=>'CartController@checkout',
+            'as'=>'book.cart.checkout'
+        ]);
+        Route::get('huy-don-hang',[
+            'uses'=>'CartController@delCart',
+            'as'=>'book.cart.delCart'
+        ]);
+    });
     Route::get('/',[
         'uses'=>'HomeController@index',
         'as'=>'book.home.index'
@@ -158,11 +268,15 @@ Route::namespace('Book')->group(function(){
         'uses'=>'AboutController@index',
         'as'=>'book.about.index'
     ]);
-    Route::get('/huong-dan-mua-sach.html',[
+    Route::get('/lien-he.html',[
+        'uses'=>'ContactController@index',
+        'as'=>'book.contact.index'
+    ]);
+    Route::get('/chinh-sach-mua-hang.html',[
         'uses'=>'AboutController@guarantee',
         'as'=>'book.about.guarantee'
     ]);
-    Route::get('/chinh-sach-bao-hanh.html',[
+    Route::get('/huong-dan-mua-sach.html',[
         'uses'=>'AboutController@shopping_guide',
         'as'=>'book.about.shopping_guide'
     ]);
@@ -182,6 +296,16 @@ Route::namespace('Book')->group(function(){
         route::get('{url}.html',[
             'uses'=>'SaleController@detail',
             'as'=>'book.sale.detail'
+        ]);
+    });
+    Route::prefix('tin-tuc')->group(function(){
+        route::get('',[
+            'uses'=>'NewsController@index',
+            'as'=>'book.news.index'
+        ]);
+        route::get('{url}.html',[
+            'uses'=>'NewsController@detail',
+            'as'=>'book.news.detail'
         ]);
     });
 });

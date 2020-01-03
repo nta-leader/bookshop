@@ -5,38 +5,6 @@
 			<div class="tg-footerarea">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<ul class="tg-clientservices">
-								<li class="tg-devlivery">
-									<span class="tg-clientserviceicon"><i class="icon-rocket"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Fast Delivery</h3>
-										<p>Shipping Worldwide</p>
-									</div>
-								</li>
-								<li class="tg-discount">
-									<span class="tg-clientserviceicon"><i class="icon-tag"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Open Discount</h3>
-										<p>Offering Open Discount</p>
-									</div>
-								</li>
-								<li class="tg-quality">
-									<span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Eyes On Quality</h3>
-										<p>Publishing Quality Work</p>
-									</div>
-								</li>
-								<li class="tg-support">
-									<span class="tg-clientserviceicon"><i class="icon-heart"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>24/7 Support</h3>
-										<p>Serving Every Moments</p>
-									</div>
-								</li>
-							</ul>
-						</div>
 						<div class="tg-threecolumns">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="tg-footercol">
@@ -44,33 +12,40 @@
 									<ul class="tg-contactinfo">
 										<li>
 											<i class="icon-apartment"></i>
-											<address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester</address>
+											<address>{{ $boot_about->address }}</address>
 										</li>
 										<li>
 											<i class="icon-phone-handset"></i>
 											<span>
-												<em>0800 12345 - 678 - 89</em>
-												<em>+4 1234 - 4567 - 67</em>
+												@php
+													$arrPhone = explode('|',$boot_about->phone);
+												@endphp
+												@foreach($arrPhone as $phone)
+												<em>{{ $phone }}</em>
+												@endforeach
 											</span>
 										</li>
 										<li>
 											<i class="icon-clock"></i>
-											<span>Serving 7 Days A Week From 9am - 5pm</span>
+											<span>{{ $boot_about->work_time }}</span>
 										</li>
 										<li>
 											<i class="icon-envelope"></i>
 											<span>
-												<em><a href="mailto:support@domain.com">support@domain.com</a></em>
-												<em><a href="mailto:info@domain.com">info@domain.com</a></em>
+												@php
+													$arrEmail = explode('|',$boot_about->email);
+												@endphp
+												@foreach($arrEmail as $email)
+												<em><a href="mailto:{{ $email }}">{{ $email }}</a></em>
+												@endforeach
 											</span>
 										</li>
-									</ul>
-									<ul class="tg-socialicons">
-										<li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-										<li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-										<li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-										<li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-										<li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+										<li>
+											<i class="icon-facebook"></i>
+											<span>
+												<em><a href="{{ $boot_about->facebook }}">{{ $boot_about->facebook }}</a></em>
+											</span>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -87,8 +62,6 @@
 											<li><a href="javascript:void(0);">Privacy</a></li>
 											<li><a href="javascript:void(0);">Cookies</a></li>
 											<li><a href="javascript:void(0);">Contact Us</a></li>
-											<li><a href="javascript:void(0);">Our Affiliates</a></li>
-											<li><a href="javascript:void(0);">Vision &amp; Aim</a></li>
 										</ul>
 										<ul>
 											<li><a href="javascript:void(0);">Our Story</a></li>
@@ -108,21 +81,21 @@
 									<div class="tg-widgetcontent">
 										<ul>
 											<li>
-												<figure><a href="javascript:void(0);"><img src="{{$urlTemplateBook}}/images/author/imag-09.jpg" alt="image description"></a></figure>
+												
 												<div class="tg-authornamebooks">
 													<h4><a href="javascript:void(0);">Jude Morphew</a></h4>
 													<p>21,658 Published Books</p>
 												</div>
 											</li>
 											<li>
-												<figure><a href="javascript:void(0);"><img src="{{$urlTemplateBook}}/images/author/imag-10.jpg" alt="image description"></a></figure>
+												
 												<div class="tg-authornamebooks">
 													<h4><a href="javascript:void(0);">Shaun Humes</a></h4>
 													<p>20,257 Published Books</p>
 												</div>
 											</li>
 											<li>
-												<figure><a href="javascript:void(0);"><img src="{{$urlTemplateBook}}/images/author/imag-11.jpg" alt="image description"></a></figure>
+												
 												<div class="tg-authornamebooks">
 													<h4><a href="javascript:void(0);">Kathrine Culbertson</a></h4>
 													<p>15,686 Published Books</p>
@@ -151,7 +124,7 @@
 		<!--************************************
 				Footer End
 		*************************************-->
-	</div>
+		
 	<!--************************************
 			Wrapper End
 	*************************************-->
@@ -166,5 +139,153 @@
 	<script src="{{$urlTemplateBook}}/js/appear.js"></script>
 	<script src="{{$urlTemplateBook}}/js/gmap3.js"></script>
 	<script src="{{$urlTemplateBook}}/js/main.js"></script>
+	<script src="{{ $urlTemplateBook }}/sweetalert-dev.js"></script>
+	<script src="{{ $urlTemplateBook }}/js/jquery.validate.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded",function(){
+			let cart = document.getElementsByClassName('tg-minicart-o');
+			for(let i=0; i<cart.length; i++){
+				cart[i].onclick = function(){
+					let show = document.getElementById('view-cart');
+					show.classList.toggle('cart-show');
+				}
+			}
+		},false)
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded",function(){
+			$.ajax({
+				type: "get",
+				url: "{{ route('book.cart.index') }}",
+				success: function(data){
+					showCart(data.data);
+				},
+				error: function (){
+					alert('Có lỗi xảy ra');
+				}
+			});			
+		},false);
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded",function(){
+			let addProduct = document.getElementById('add-product');
+			
+			addProduct.onclick = function(){
+				let quantity = document.getElementById('quantity').value;
+				let id_product = this.getAttribute('data-id_product');
+
+				$.ajax({
+					type: "get",
+					url: "{{ route('book.cart.addProduct') }}",
+					data: {
+						"id_product":id_product,
+						"quantity":quantity
+					},
+					success: function(data){
+						swal({   
+							title: data.message,
+							text: "",         
+							type: "success",   
+							showCancelButton: false,   
+							confirmButtonColor: "red",   
+							closeOnConfirm: false,
+							showConfirmButton: false,  
+							timer: 1000 
+							}
+						);
+						showCart(data.data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				});
+			}
+		},false);
+	</script>
+	<script>
+		function update(id_product,value,quantity=2){
+			if(quantity > 1){
+				$.ajax({
+					type: "get",
+					url: "{{ route('book.cart.update') }}",
+					data: {
+						"id_product":id_product,
+						"value":value
+					},
+					success: function(data){
+						showCart(data.data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				});
+			}
+		}
+	</script>
+	<script>
+		function delCart(){
+			$.ajax({
+				type: "get",
+				url: "{{ route('book.cart.delCart') }}",
+				success: function(data){
+					showCart(data.data);
+				},
+				error: function (){
+					alert('Có lỗi xảy ra');
+				}
+			});
+		}
+	</script>
+	<script>
+		$(document).ready(function() {
+		//Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+			$("#order_form").validate({
+				rules: {
+					name: "required",
+					address: "required",
+					phone: {
+						required: true,
+						number:true,
+						minlength: 10,
+						maxlength:10
+					}
+				},
+				messages: {
+					name: "Vui lòng nhập họ tên !",
+					address: "Vui lòng nhập địa chỉ ! ",
+					phone: {
+						required: "Vui lòng nhập số điện thoại !",
+						number: "Vui lòng nhập số !",
+						minlength: "SDT tối thiểu 10 số !",
+						maxlength: "SDT tối đa 10 số !"
+					}
+				},
+				submitHandler: function (form) {
+				
+					var name = document.getElementById('name').value;
+					var phone = document.getElementById('phone').value;
+					var address = document.getElementById('address').value;
+
+					$.ajax({
+						url: '{{ route('book.cart.checkout') }}',
+						type: 'get',
+						cache: false,
+						data: {
+							name:name,
+							phone:phone,
+							address:address
+						},
+						success: function(data){
+							showCart(data.data);
+							swal(data.message,"","success");
+						},
+						error: function (){
+							alert('Có lỗi xảy ra');
+						}
+					});
+				}
+			});
+		});
+	</script>
 </body>
 </html>

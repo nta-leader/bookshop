@@ -1,6 +1,6 @@
 @extends('templates.book.master')
 @section('title')
-The gioi sach
+Thế giới sách
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@ The gioi sach
     <div id="tg-homeslider" class="tg-homeslider tg-homeslidervtwo tg-haslayout owl-carousel">
         @foreach($slides as $slide)
         <div class="item">
-            <img src="/storage/app/files/sale/{{ $slide->picture }}" alt="{{ $slide->name }}">
+            <a href="{{ route('book.sale.detail',['url'=>$slide->url]) }}"><img src="/storage/app/files/sale/{{ $slide->picture }}" alt="{{ $slide->name }}"></a>
         </div>
         @endforeach
     </div>
@@ -33,7 +33,7 @@ The gioi sach
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="tg-sectionhead">
                         <h2><span>Sách ngẫu nhiên</span>Sách sale</h2>
-                        <a class="tg-btn" href="javascript:void(0);">Xem thêm</a>
+                        <a class="tg-btn" href="{{ route('book.sale.index') }}">Xem thêm</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -164,114 +164,21 @@ The gioi sach
                     </div>
                 </div>
                 <div id="tg-postslider" class="tg-postslider tg-blogpost owl-carousel">
+                    @foreach($news as $objItem)
+                    @php
+                        $url = route('book.news.detail',['url'=>$objItem->url]);
+                        $name = $objItem->name;
+                        $picture = $objItem->picture;
+                    @endphp
                     <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-01.jpg" alt="image description"></a></figure>
+                        <figure><a href="{{ $url }}"><img src="/storage/app/files/news/{{ $picture }}" alt="{{ $name }}"></a></figure>
                         <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
                             <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">Where The Wild Things Are</a></h3>
+                                <h3><a href="{{ $url }}">{{ $name }}</a></h3>
                             </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
                         </div>
                     </article>
-                    <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-02.jpg" alt="image description"></a></figure>
-                        <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                            <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">All She Wants To Do Is Dance</a></h3>
-                            </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-03.jpg" alt="image description"></a></figure>
-                        <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                            <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">Why Walk When You Can Climb?</a></h3>
-                            </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-04.jpg" alt="image description"></a></figure>
-                        <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                            <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">Dance Like Nobody’s Watching</a></h3>
-                            </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-02.jpg" alt="image description"></a></figure>
-                        <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                            <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">All She Wants To Do Is Dance</a></h3>
-                            </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="item tg-post">
-                        <figure><a href="javascript:void(0);"><img src="{{ $urlTemplateBook }}/images/blog/img-03.jpg" alt="image description"></a></figure>
-                        <div class="tg-postcontent">
-                            <ul class="tg-bookscategories">
-                                <li><a href="javascript:void(0);">Adventure</a></li>
-                                <li><a href="javascript:void(0);">Fun</a></li>
-                            </ul>
-                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                            <div class="tg-posttitle">
-                                <h3><a href="javascript:void(0);">Why Walk When You Can Climb?</a></h3>
-                            </div>
-                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                            <ul class="tg-postmetadata">
-                                <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-                                <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-                            </ul>
-                        </div>
-                    </article>
+                    @endforeach
                 </div>
             </div>
         </div>

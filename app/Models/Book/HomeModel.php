@@ -9,6 +9,9 @@ class HomeModel extends Model
 {
     protected $arrId=[];
 
+    public function getNews(){
+        return DB::table('news')->select('url','name','picture')->limit(10)->orderBy('id', 'DESC')->get();
+    }
     public function getSlides(){
         return DB::table('sale')->where('id','!=',0)->get();
     }
